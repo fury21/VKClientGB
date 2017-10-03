@@ -28,8 +28,7 @@ class VKService {
             "user_id": vKId,
             "fields": "photo_50,online",
             "access_token": globalToken,
-            "v": "5.68",
-            "expires_in": 0
+            "v": "5.68"
         ]
         
         let url = baseUrl + path
@@ -55,8 +54,7 @@ class VKService {
             "user_id": vKId,
             "extended": 1,
             "access_token": globalToken,
-            "v": "5.68",
-            "expires_in": 0
+            "v": "5.68"
         ]
         
         let url = baseUrl + path
@@ -82,7 +80,6 @@ class VKService {
             "user_id": vKId,
             "count": 200,
             "access_token": globalToken,
-            "expires_in": 0,
             "v": "5.68",
             "no_service_albums": "1"
         ]
@@ -104,7 +101,7 @@ class VKService {
             "count": 20,
             "access_token": globalToken,
             "v": "5.68",
-            "expires_in": 0
+            "type": "group"
         ]
         
         let url = baseUrl + path
@@ -121,6 +118,9 @@ class VKService {
             completion(q)
         }
     }
+    
+    
+    
     //http://api.vk.com/oauth/logout
     func getrequest() -> URLRequest {
         var urlComponents = URLComponents()

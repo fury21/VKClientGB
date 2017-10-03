@@ -63,28 +63,30 @@ class MyGroupsController: UITableViewController {
         return cell
     }
     
-    @IBAction func addGroup(segue: UIStoryboardSegue) {
-        //Проверяем идентификатор перехода, что бы убедится что это нужныий переход
-        if segue.identifier == "addGroup" {
-            //получаем ссылку на контроллер с которого осуществлен переход
-            let allGroupsController = segue.source as! AllGroupsController
-            
-            //получаем индекс выделенной ячейки
-            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-                //получаем город по индксу
-                let group = groups1[indexPath.row]
-                
-                print("zzz",indexPath.row)
-                //Проверяем что такого города нет в списке
-                if !myGroups.contains(group) {
-                    //добавляем город в список выбранных городов
-                   //getMyGroups.append(group)
-                    //обновляем таблицу
-                    tableView.reloadData()
-                }
-            }
-        }
-    }
+//    @IBAction func addGroup(segue: UIStoryboardSegue) {
+//        //Проверяем идентификатор перехода, что бы убедится что это нужныий переход
+//        if segue.identifier == "addGroup" {
+//            //получаем ссылку на контроллер с которого осуществлен переход
+//            let allGroupsController = segue.source as! AllGroupsController
+//
+//            //получаем индекс выделенной ячейки
+//            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
+//                //получаем город по индксу
+//                //let group = groups1[indexPath.row]
+//
+//                print("zzz",indexPath.row)
+//                //Проверяем что такого города нет в списке
+//                if !myGroups.contains(group) {
+//                    //добавляем город в список выбранных городов
+//                   //getMyGroups.append(group)
+//                    //обновляем таблицу
+//                    tableView.reloadData()
+//                }
+//            }
+//        }
+//    }
+    
+    
 //    //Проверяем идентификатор перехода, что бы убедится что это нужныий переход
 //    if segue.identifier == "addGroup" {
 //    //получаем ссылку на контроллер с которого осуществлен переход

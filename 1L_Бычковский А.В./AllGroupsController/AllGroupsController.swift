@@ -8,18 +8,21 @@
 
 import UIKit
 
-var groups1 = [
-"Moscow",
-"Tomsk"
-]
 
-class AllGroupsController: UITableViewController {
+class AllGroupsController: UITableViewController, UISearchBarDelegate {
 
-  
+    let vKService = VKService()
+    var searchMyGroup = [SearchGroups]()
+
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        searchBar.delegate = self
+        searchBar.returnKeyType = UIReturnKeyType.done
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -36,18 +39,31 @@ class AllGroupsController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return groups1.count
+        return searchMyGroup.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllGroupsCell", for: indexPath) as! AllGroupsCell
 
-    cell.groupName.text = groups1[indexPath.row]
+        cell.groupName.text = searchMyGroup[indexPath.row].groupName
+        cell.groupImg.setImageFromURL(stringImageUrl: searchMyGroup[indexPath.row].groupImg50)
 
         return cell
     }
 
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == "" || searchBar.text == nil {
+            searchMyGroup.removeAll()
+            tableView.reloadData()
+        } else {
+            self.vKService.searchVKAnyGroups(q: searchBar.text!.lowercased())  { [weak self] searchMyGroup in
+                    self?.searchMyGroup = searchMyGroup
+                    self?.tableView?.reloadData()
+            }
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

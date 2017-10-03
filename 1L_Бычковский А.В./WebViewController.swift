@@ -12,6 +12,8 @@ import Alamofire
 
 class WebViewController: UIViewController {
     
+    @IBAction func butt(_ sender: Any) {
+    }
     
     @IBOutlet weak var webview: WKWebView! {
         didSet {
