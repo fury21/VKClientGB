@@ -8,9 +8,9 @@
 
 import UIKit
 
-
 class AllGroupsController: UITableViewController, UISearchBarDelegate {
 
+    
     let vKService = VKService()
     var searchMyGroup = [SearchGroups]()
 

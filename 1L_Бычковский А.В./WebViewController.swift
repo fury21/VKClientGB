@@ -8,12 +8,11 @@
 
 import Foundation
 import WebKit
-import Alamofire
+import SwiftKeychainWrapper
 
 class WebViewController: UIViewController {
     
-    @IBAction func butt(_ sender: Any) {
-    }
+    var service = VKService()
     
     @IBOutlet weak var webview: WKWebView! {
         didSet {
@@ -21,7 +20,6 @@ class WebViewController: UIViewController {
         }
     }
     
-    var service = VKService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,16 +48,11 @@ extension WebViewController: WKNavigationDelegate {
                 dict[key] = value
                 return dict
         }
-        
-        print(params)
-        
-        let token = params["access_token"]
-        
-        globalToken = token!
+
+        let saveSuccessful: Bool = KeychainWrapper.standard.set(params["access_token"]!, forKey: "vkApiToken")
+
         decisionHandler(.cancel)
         
-        performSegue(withIdentifier: "toLoginPage", sender: token)
+        performSegue(withIdentifier: "toLoginPage", sender: self)
     }
 }
-
-var globalToken: String = ""

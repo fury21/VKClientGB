@@ -10,7 +10,6 @@
 		153223EDA3772CBCF53FE822 /* Pods_1L_________________.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30CA2B9570432FAE6FE9FBB1 /* Pods_1L_________________.framework */; };
 		380382401F81366C00CB63D4 /* SearchGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3803823F1F81366C00CB63D4 /* SearchGroups.swift */; };
 		380FE7BC1F76AA5B00529ECA /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FE7BB1F76AA5B00529ECA /* VKService.swift */; };
-		38569B051F7D5BA9001AD141 /* Autorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B041F7D5BA9001AD141 /* Autorization.swift */; };
 		38569B071F8018A1001AD141 /* GetMyGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B061F8018A1001AD141 /* GetMyGroups.swift */; };
 		38569B0C1F8118AA001AD141 /* MyFriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0B1F8118AA001AD141 /* MyFriendsController.swift */; };
 		38569B0E1F811947001AD141 /* MyFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0D1F811947001AD141 /* MyFriendsCell.swift */; };
@@ -33,7 +32,6 @@
 		30CA2B9570432FAE6FE9FBB1 /* Pods_1L_________________.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_1L_________________.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3803823F1F81366C00CB63D4 /* SearchGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGroups.swift; sourceTree = "<group>"; };
 		380FE7BB1F76AA5B00529ECA /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
-		38569B041F7D5BA9001AD141 /* Autorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Autorization.swift; sourceTree = "<group>"; };
 		38569B061F8018A1001AD141 /* GetMyGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyGroups.swift; sourceTree = "<group>"; };
 		38569B0B1F8118AA001AD141 /* MyFriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsController.swift; sourceTree = "<group>"; };
 		38569B0D1F811947001AD141 /* MyFriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsCell.swift; sourceTree = "<group>"; };
@@ -76,22 +74,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3803823D1F81364900CB63D4 /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				3803823E1F81365500CB63D4 /* SearchGroups */,
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
-		3803823E1F81365500CB63D4 /* SearchGroups */ = {
-			isa = PBXGroup;
-			children = (
-				3803823F1F81366C00CB63D4 /* SearchGroups.swift */,
-			);
-			path = SearchGroups;
-			sourceTree = "<group>";
-		};
 		380FE7BA1F76AA2100529ECA /* VKService */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,17 +114,15 @@
 			isa = PBXGroup;
 			children = (
 				380FE7BA1F76AA2100529ECA /* VKService */,
-				3803823D1F81364900CB63D4 /* Search */,
 				38569B081F811854001AD141 /* MyFriendsController */,
 				38FE7F741F73D03F00EFDF92 /* VK */,
 				38FE7F6F1F7319EB00EFDF92 /* MyGroupsController */,
 				38FE7F6A1F730A1900EFDF92 /* AllGroupsController */,
 				38E3A1F31F6989B800F536F8 /* AppDelegate.swift */,
-				38E3A1F71F6989B800F536F8 /* Main.storyboard */,
-				38569B041F7D5BA9001AD141 /* Autorization.swift */,
 				38E3A2051F6994C200F536F8 /* LoginFormController.swift */,
 				386244331F8264700013E479 /* WebViewController.swift */,
 				38E3A1FA1F6989B800F536F8 /* Assets.xcassets */,
+				38E3A1F71F6989B800F536F8 /* Main.storyboard */,
 				38E3A1FC1F6989B800F536F8 /* LaunchScreen.storyboard */,
 				38E3A1FF1F6989B800F536F8 /* Info.plist */,
 			);
@@ -164,6 +144,7 @@
 				38FE7F721F731A6E00EFDF92 /* MyGroupsController.swift */,
 				389CF0F71F74792700B8A4C9 /* MyGroupsCell.swift */,
 				38569B061F8018A1001AD141 /* GetMyGroups.swift */,
+				3803823F1F81366C00CB63D4 /* SearchGroups.swift */,
 			);
 			path = MyGroupsController;
 			sourceTree = "<group>";
@@ -284,11 +265,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-1L_Бычковский А.В./Pods-1L_Бычковский А.В.-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,7 +314,6 @@
 				38FE7F6E1F730D3200EFDF92 /* AllGroupsCell.swift in Sources */,
 				380382401F81366C00CB63D4 /* SearchGroups.swift in Sources */,
 				38FE7F781F73D0A600EFDF92 /* VKCell.swift in Sources */,
-				38569B051F7D5BA9001AD141 /* Autorization.swift in Sources */,
 				38E3A1F41F6989B800F536F8 /* AppDelegate.swift in Sources */,
 				386244341F8264700013E479 /* WebViewController.swift in Sources */,
 			);

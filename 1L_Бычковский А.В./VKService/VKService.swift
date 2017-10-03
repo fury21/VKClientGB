@@ -12,12 +12,14 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import SwiftKeychainWrapper
 
 class VKService {
     // параметры API ВКонтакте	
     let baseUrl = "https://api.vk.com"
     let myVkId = 124505735 // id моей страницы
     let appId = 6195650 // id приложения в ВК
+    let vkToken: String? = KeychainWrapper.standard.string(forKey: "vkApiToken")
     
     
     // список друзей по id
@@ -27,13 +29,12 @@ class VKService {
         let parameters: Parameters = [
             "user_id": vKId,
             "fields": "photo_50,online",
-            "access_token": globalToken,
+            "access_token": vkToken!,
             "v": "5.68"
         ]
-        
+
         let url = baseUrl + path
         
-        //делаем запрос
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             guard let data = response.value else { return }
             
@@ -53,13 +54,12 @@ class VKService {
         let parameters: Parameters = [
             "user_id": vKId,
             "extended": 1,
-            "access_token": globalToken,
+            "access_token": vkToken!,
             "v": "5.68"
         ]
         
         let url = baseUrl + path
         
-        //делаем запрос
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             guard let data = response.value else { return }
             
@@ -79,16 +79,15 @@ class VKService {
         let parameters: Parameters = [
             "user_id": vKId,
             "count": 200,
-            "access_token": globalToken,
+            "access_token": vkToken!,
             "v": "5.68",
             "no_service_albums": "1"
         ]
         
         let url = baseUrl + path
         
-        //делаем запрос
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
-            print(response.value, response.request)
+
         }
     }
     
@@ -99,14 +98,13 @@ class VKService {
         let parameters: Parameters = [
             "q": q,
             "count": 20,
-            "access_token": globalToken,
+            "access_token": vkToken!,
             "v": "5.68",
             "type": "group"
         ]
         
         let url = baseUrl + path
         
-        //делаем запрос
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             
             guard let data = response.value else { return }
@@ -119,9 +117,6 @@ class VKService {
         }
     }
     
-    
-    
-    //http://api.vk.com/oauth/logout
     func getrequest() -> URLRequest {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -141,36 +136,6 @@ class VKService {
         return request
     }
 }
-    //        var urlComponents = URLComponents()
-    //        urlComponents.scheme = "http"
-    //        urlComponents.host = "api.vk.com"
-    //        urlComponents.path = "/oauth/logout"
-    //
-    //
-    //        let request = URLRequest(url: urlComponents.url!)
-    //
-    ////        return request
-    //    }
-    //}
-    
-    //{
-    //    var urlComponents = URLComponents()
-    //    urlComponents.scheme = "https"
-    //    urlComponents.host = "oauth.vk.com"
-    //    urlComponents.path = "/authorize"
-    //    urlComponents.queryItems = [
-    //        URLQueryItem(name: "client_id", value: "6196632"),
-    //        URLQueryItem(name: "display", value: "mobile"),
-    //        URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
-    //        URLQueryItem(name: "scope", value: "262150"),
-    //        URLQueryItem(name: "response_type", value: "token"),
-    //        URLQueryItem(name: "v", value: "5.68")
-    //    ]
-    //
-    //    let request = URLRequest(url: urlComponents.url!)
-    //
-    //    return request
-    //}
     
     extension UIImageView {
         func setImageFromURL(stringImageUrl url: String) {
