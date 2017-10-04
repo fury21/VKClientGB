@@ -10,8 +10,6 @@ import UIKit
 
 class MyGroupsController: UITableViewController {
     
-    var myGroups = [String]()
-    
     let vKService = VKService()
     var getMyGroups = [GetMyGroups]()
     
@@ -63,51 +61,28 @@ class MyGroupsController: UITableViewController {
         return cell
     }
     
-//    @IBAction func addGroup(segue: UIStoryboardSegue) {
-//        //Проверяем идентификатор перехода, что бы убедится что это нужныий переход
-//        if segue.identifier == "addGroup" {
-//            //получаем ссылку на контроллер с которого осуществлен переход
-//            let allGroupsController = segue.source as! AllGroupsController
-//
-//            //получаем индекс выделенной ячейки
-//            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-//                //получаем город по индксу
-//                //let group = groups1[indexPath.row]
-//
-//                print("zzz",indexPath.row)
-//                //Проверяем что такого города нет в списке
-//                if !myGroups.contains(group) {
-//                    //добавляем город в список выбранных городов
-//                   //getMyGroups.append(group)
-//                    //обновляем таблицу
-//                    tableView.reloadData()
-//                }
-//            }
-//        }
-//    }
+    @IBAction func addGroup(segue: UIStoryboardSegue) {
+        //Проверяем идентификатор перехода, что бы убедится что это нужныий переход
+        if segue.identifier == "addGroup" {
+            //получаем ссылку на контроллер с которого осуществлен переход
+            let allGroupsController = segue.source as! AllGroupsController
+
+            //получаем индекс выделенной ячейки
+            if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
+                //получаем город по индксу
+                let group = allGroupsController.searchMyGroup[indexPath.row]
+              
+                //Проверяем что такого города нет в списке
+                if !getMyGroups.contains(where: { $0.groupName == group.groupName } ) {
+                    //добавляем город в список выбранных городов
+                   getMyGroups.append(GetMyGroups(groupName: group.groupName, groupPhoto50: group.groupImg50))
+                    //обновляем таблицу
+                    tableView.reloadData()
+                }
+            }
+        }
+    }
     
-    
-//    //Проверяем идентификатор перехода, что бы убедится что это нужныий переход
-//    if segue.identifier == "addGroup" {
-//    //получаем ссылку на контроллер с которого осуществлен переход
-//    let allGroupsController = segue.source as! AllGroupsController
-//    
-//    //получаем индекс выделенной ячейки
-//    if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-//    //получаем город по индксу
-//    let  group = allGroupsController.groups[indexPath.row]
-//    
-//    //Проверяем что такого города нет в списке
-//    if !groups.contains(group) {
-//    //добавляем город в список выбранных городов
-//    groups.append(group)
-//    //обновляем таблицу
-//    tableView.reloadData()
-//    }
-//    }
-//    }
-//    
-//    }
     
     /*
      // Override to support conditional editing of the table view.
@@ -122,7 +97,7 @@ class MyGroupsController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            var a = getMyGroups.remove(at: indexPath.row)
+            getMyGroups.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)    
         }
     }

@@ -15,6 +15,11 @@ class GetMyGroups {
     var groupIsClosed = [Int]()
     var groupPhoto50 = ""
     
+    init(groupName: String, groupPhoto50: String) {
+        self.groupName = groupName
+        self.groupPhoto50 = groupPhoto50
+    }
+    
     init(json: JSON) {
         groupName = json["name"].stringValue
         groupPhoto50 = json["photo_50"].stringValue

@@ -53,6 +53,6 @@ extension WebViewController: WKNavigationDelegate {
 
         decisionHandler(.cancel)
         
-        performSegue(withIdentifier: "toLoginPage", sender: self)
+        performSegue(withIdentifier: "toLoginPage", sender: nil)
     }
 }
