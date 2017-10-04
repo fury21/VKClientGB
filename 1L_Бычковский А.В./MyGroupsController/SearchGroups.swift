@@ -10,10 +10,12 @@ import Foundation
 import SwiftyJSON
 
 class SearchGroups {
+    var groupId = 0
     var groupName = ""
     var groupImg50 = ""
     
     init(json: JSON) {
+        groupId = json["id"].intValue
         groupName = json["name"].stringValue
         groupImg50 = json["photo_50"].stringValue
     }

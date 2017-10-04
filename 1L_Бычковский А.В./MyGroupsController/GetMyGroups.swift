@@ -10,17 +10,19 @@ import Foundation
 import SwiftyJSON
 
 class GetMyGroups {
-    
+    var groupId = 0
     var groupName = ""
     var groupIsClosed = [Int]()
     var groupPhoto50 = ""
     
-    init(groupName: String, groupPhoto50: String) {
+    init(groupId: Int, groupName: String, groupPhoto50: String) {
         self.groupName = groupName
         self.groupPhoto50 = groupPhoto50
+        self.groupId = groupId
     }
     
     init(json: JSON) {
+        groupId = json["id"].intValue
         groupName = json["name"].stringValue
         groupPhoto50 = json["photo_50"].stringValue
     }

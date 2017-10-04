@@ -117,6 +117,35 @@ class VKService {
         }
     }
     
+    enum joinAndLeaveGroup {
+        case joinGroup
+        case leaveGroup
+    }
+    
+    func joinAndLeaveAnyGroup(groupId: Int, action: joinAndLeaveGroup) {
+        var path = ""
+        
+        if action == .joinGroup {
+            path = "/method/groups.join"
+        } else {
+             path = "/method/groups.leave"
+        }
+        
+        
+        let parameters: Parameters = [
+            "group_id": groupId,
+            "access_token": vkToken!,
+            "v": "5.68"
+        ]
+        
+        let url = baseUrl + path
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
+            print("+++", response.value!)
+        }
+    }
+    
+    
     func getrequest() -> URLRequest {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"

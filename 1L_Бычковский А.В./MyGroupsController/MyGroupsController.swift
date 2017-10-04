@@ -73,9 +73,12 @@ class MyGroupsController: UITableViewController {
                 let group = allGroupsController.searchMyGroup[indexPath.row]
               
                 //Проверяем что такого города нет в списке
-                if !getMyGroups.contains(where: { $0.groupName == group.groupName } ) {
+                if !getMyGroups.contains(where: { $0.groupId == group.groupId } ) {
                     //добавляем город в список выбранных городов
-                   getMyGroups.append(GetMyGroups(groupName: group.groupName, groupPhoto50: group.groupImg50))
+                    
+                    vKService.joinAndLeaveAnyGroup(groupId: group.groupId, action: .joinGroup)
+                    getMyGroups.append(GetMyGroups(groupId: group.groupId, groupName: group.groupName, groupPhoto50: group.groupImg50))
+                    
                     //обновляем таблицу
                     tableView.reloadData()
                 }
@@ -95,10 +98,13 @@ class MyGroupsController: UITableViewController {
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
             // Delete the row from the data source
+            
+            vKService.joinAndLeaveAnyGroup(groupId: getMyGroups[indexPath.row].groupId, action: .leaveGroup)
             getMyGroups.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)    
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
