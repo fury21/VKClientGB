@@ -49,8 +49,10 @@ extension WebViewController: WKNavigationDelegate {
                 return dict
         }
 
-        let saveSuccessful: Bool = KeychainWrapper.standard.set(params["access_token"]!, forKey: "vkApiToken")
- 
+        KeychainWrapper.standard.set(params["access_token"]!, forKey: "vkApiToken")
+        KeychainWrapper.standard.set(params["user_id"]!, forKey: "vkApiUser_id")
+
+
         decisionHandler(.cancel)
         
         performSegue(withIdentifier: "toLoginPage", sender: nil)

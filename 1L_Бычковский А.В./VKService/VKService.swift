@@ -17,9 +17,8 @@ import SwiftKeychainWrapper
 class VKService {
     // параметры API ВКонтакте	
     let baseUrl = "https://api.vk.com"
-    let myVkId = 124505735 // id моей страницы
+    //////////////let myVkId = 124505735 // id моей страницы
     let appId = 6195650 // id приложения в ВК
-    let vkToken: String? = KeychainWrapper.standard.string(forKey: "vkApiToken")
     
     
     // список друзей по id
@@ -29,7 +28,7 @@ class VKService {
         let parameters: Parameters = [
             "user_id": vKId,
             "fields": "photo_50,online",
-            "access_token": vkToken!,
+            "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
             "v": "5.68"
         ]
         
@@ -54,7 +53,7 @@ class VKService {
         let parameters: Parameters = [
             "user_id": vKId,
             "extended": 1,
-            "access_token": vkToken!,
+            "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
             "v": "5.68"
         ]
         
@@ -79,7 +78,7 @@ class VKService {
         let parameters: Parameters = [
             "user_id": vKId,
             "count": 200,
-            "access_token": vkToken!,
+            "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
             "v": "5.68",
             "no_service_albums": "1"
         ]
@@ -98,7 +97,7 @@ class VKService {
         let parameters: Parameters = [
             "q": q,
             "count": 20,
-            "access_token": vkToken!,
+            "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
             "v": "5.68",
             "type": "group"
         ]
@@ -134,7 +133,7 @@ class VKService {
         
         let parameters: Parameters = [
             "group_id": groupId,
-            "access_token": vkToken!,
+            "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
             "v": "5.68"
         ]
         

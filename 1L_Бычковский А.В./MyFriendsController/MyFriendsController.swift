@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class MyFriendsController: UITableViewController {
 
@@ -18,7 +19,7 @@ class MyFriendsController: UITableViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
 
-            vKService.loadVKAnyFriends(vKId: vKService.myVkId) { [weak self] getMyFriends in
+            vKService.loadVKAnyFriends(vKId: Int(KeychainWrapper.standard.string(forKey: "vkApiUser_id")!)!) { [weak self] getMyFriends in
                 self?.getMyFriends = getMyFriends
                 self?.tableView?.reloadData()
             }

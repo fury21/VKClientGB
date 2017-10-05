@@ -53,8 +53,6 @@ class AllGroupsController: UITableViewController, UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        var a = VKService()
-        a.loadVKAnyPhotos(vKId: 123)
         
         if searchBar.text == "" || searchBar.text == nil {
             searchMyGroup.removeAll()

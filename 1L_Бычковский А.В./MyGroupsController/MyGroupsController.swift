@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class MyGroupsController: UITableViewController {
     
@@ -16,7 +17,7 @@ class MyGroupsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        vKService.loadVKAnyGroups(vKId: vKService.myVkId) { [weak self] getMyGroups in
+        vKService.loadVKAnyGroups(vKId: Int(KeychainWrapper.standard.string(forKey: "vkApiUser_id")!)!) { [weak self] getMyGroups in
             self?.getMyGroups = getMyGroups
             self?.tableView?.reloadData()
         }
