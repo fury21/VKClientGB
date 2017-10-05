@@ -8,6 +8,7 @@ target '1L_Бычковский А.В.' do
   pod 'Alamofire', '~> 4.5'
   pod 'SwiftyJSON'
   pod 'SwiftKeychainWrapper'
+  pod 'RealmSwift'
   # Pods for 1L_Бычковский А.В.
 
 end

@@ -29,7 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		30CA2B9570432FAE6FE9FBB1 /* Pods_1L_________________.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_1L_________________.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30CA2B9570432FAE6FE9FBB1 /* Pods_1L_________________.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_1L_________________.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3803823F1F81366C00CB63D4 /* SearchGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGroups.swift; sourceTree = "<group>"; };
 		380FE7BB1F76AA5B00529ECA /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
 		38569B061F8018A1001AD141 /* GetMyGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyGroups.swift; sourceTree = "<group>"; };
@@ -265,12 +265,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-1L_Бычковский А.В./Pods-1L_Бычковский А.В.-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);

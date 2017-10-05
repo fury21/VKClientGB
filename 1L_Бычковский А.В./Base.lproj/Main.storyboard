@@ -489,6 +489,6 @@
         <image name="offline" width="10" height="10"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Wbl-VA-DCV"/>
+        <segue reference="gsG-1x-IpT"/>
     </inferredMetricsTieBreakers>
 </document>

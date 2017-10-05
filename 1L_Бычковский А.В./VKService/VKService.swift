@@ -32,7 +32,7 @@ class VKService {
             "access_token": vkToken!,
             "v": "5.68"
         ]
-
+        
         let url = baseUrl + path
         
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
@@ -87,7 +87,7 @@ class VKService {
         let url = baseUrl + path
         
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
-
+            
         }
     }
     
@@ -117,18 +117,18 @@ class VKService {
         }
     }
     
-    enum joinAndLeaveGroup {
-        case joinGroup
-        case leaveGroup
+    enum joinAndLeaveGroup: String {
+        case joinGroup = "/method/groups.join"
+        case leaveGroup = "/method/groups.leave"
     }
     
     func joinAndLeaveAnyGroup(groupId: Int, action: joinAndLeaveGroup) {
         var path = ""
         
         if action == .joinGroup {
-            path = "/method/groups.join"
+            path = joinAndLeaveGroup.joinGroup.rawValue
         } else {
-             path = "/method/groups.leave"
+            path = joinAndLeaveGroup.leaveGroup.rawValue
         }
         
         
@@ -141,7 +141,7 @@ class VKService {
         let url = baseUrl + path
         
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
-            print("+++", response.value!)
+            
         }
     }
     
@@ -165,13 +165,13 @@ class VKService {
         return request
     }
 }
-    
-    extension UIImageView {
-        func setImageFromURL(stringImageUrl url: String) {
-            if let url = NSURL(string: url) {
-                if let data = NSData(contentsOf: url as URL) {
-                    self.image = UIImage(data: data as Data)
-                }
+
+extension UIImageView {
+    func setImageFromURL(stringImageUrl url: String) {
+        if let url = NSURL(string: url) {
+            if let data = NSData(contentsOf: url as URL) {
+                self.image = UIImage(data: data as Data)
             }
         }
+    }
 }
