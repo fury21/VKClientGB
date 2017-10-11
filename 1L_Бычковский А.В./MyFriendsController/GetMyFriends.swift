@@ -8,18 +8,23 @@
 
 import Foundation
 import SwiftyJSON
+import RealmSwift
 
-class GetMyFriends {
-    var friendId = 0
-    var friendFullName = ""
-    var friendPhoto50 = ""
-    var frindsOnlineStatus = "offline"
+class GetMyFriends: Object {
+    @objc dynamic var friendId = 0
+    @objc dynamic var friendFullName = ""
+    @objc dynamic var friendPhoto50 = ""
+    @objc dynamic var frindsOnlineStatus = "offline"
     
-    
-    init(json: JSON) {
+    convenience init(json: JSON) {
+        self.init()
         friendId = json["id"].intValue
         friendFullName = json["first_name"].stringValue + " " + json["last_name"].stringValue
         friendPhoto50 = json["photo_50"].stringValue
         if json["online"].intValue == 1 { frindsOnlineStatus = "online" } else { frindsOnlineStatus = "offline" }
+    }
+    
+    override static func primaryKey() -> String {
+        return "friendId"
     }
 }

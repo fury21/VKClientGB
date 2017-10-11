@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftKeychainWrapper
+import RealmSwift
 
 class MyGroupsController: UITableViewController {
     
@@ -16,9 +17,11 @@ class MyGroupsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadGroupsFromRealm()
        
-        vKService.loadVKAnyGroups(vKId: Int(KeychainWrapper.standard.string(forKey: "vkApiUser_id")!)!) { [weak self] getMyGroups in
-            self?.getMyGroups = getMyGroups
+        vKService.loadVKAnyGroups(vKId: vKService.userVkId) { [weak self] in
+            self?.loadGroupsFromRealm()
             self?.tableView?.reloadData()
         }
         
@@ -30,6 +33,15 @@ class MyGroupsController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
+    func loadGroupsFromRealm() {
+        do {
+            let realm = try Realm()
+            let realmroups = realm.objects(GetMyGroups.self)
+            self.getMyGroups = Array(realmroups)
+        } catch {
+            print(error)
+        }
+    }
     
     // MARK: - Table view data source
     

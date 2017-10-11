@@ -10,6 +10,8 @@ import Foundation
 import WebKit
 import SwiftKeychainWrapper
 
+let userDefaults = UserDefaults.standard
+
 class WebViewController: UIViewController {
     
     var service = VKService()
@@ -48,11 +50,11 @@ extension WebViewController: WKNavigationDelegate {
                 dict[key] = value
                 return dict
         }
-
+        
+        
         KeychainWrapper.standard.set(params["access_token"]!, forKey: "vkApiToken")
-        KeychainWrapper.standard.set(params["user_id"]!, forKey: "vkApiUser_id")
-
-
+        userDefaults.set(params["user_id"]!, forKey: "vkApiUser_id")
+        
         decisionHandler(.cancel)
         
         performSegue(withIdentifier: "toLoginPage", sender: nil)

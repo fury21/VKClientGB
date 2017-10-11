@@ -5,24 +5,21 @@
 //  Created by Александр Б. on 23.09.17.
 //  Copyright © 2017 Александр Б. All rights reserved.
 
-// https://oauth.vk.com/authorize?client_id=6195650&display=page&redirect_uri=&scope=friends,offline,photos&response_type=token&v=5.68&state=123456
-
-
-
 import Foundation
 import Alamofire
 import SwiftyJSON
 import SwiftKeychainWrapper
+import RealmSwift
 
 class VKService {
     // параметры API ВКонтакте	
     let baseUrl = "https://api.vk.com"
-    //////////////let myVkId = 124505735 // id моей страницы
+    let userVkId = userDefaults.integer(forKey: "vkApiUser_id") // id страницы авторизованного пользователя
     let appId = 6195650 // id приложения в ВК
     
     
     // список друзей по id
-    func loadVKAnyFriends(vKId: Int, completion: @escaping ([GetMyFriends]) -> Void) {
+    func loadVKAnyFriends(vKId: Int, completion: @escaping () -> Void) {
         let path = "/method/friends.get"
         
         let parameters: Parameters = [
@@ -34,20 +31,22 @@ class VKService {
         
         let url = baseUrl + path
         
-        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { [weak self] response in
             guard let data = response.value else { return }
             
             let json = JSON(data)
             
             let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) }
             
-            completion(friends)
+            self?.saveMyFriendsToRealm(friends)
+            
+            completion()
         }
     }
     
     
     // список групп по id
-    func loadVKAnyGroups(vKId: Int, completion: @escaping ([GetMyGroups]) -> Void) {
+    func loadVKAnyGroups(vKId: Int, completion: @escaping () -> Void) {
         let path = "/method/groups.get"
         
         let parameters: Parameters = [
@@ -59,14 +58,16 @@ class VKService {
         
         let url = baseUrl + path
         
-        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { [weak self] response in
             guard let data = response.value else { return }
             
             let json = JSON(data)
             
             let groups = json["response"]["items"].flatMap { GetMyGroups(json: $0.1) }
             
-            completion(groups)
+            self?.saveMyGroupsToRealm(groups)
+            
+            completion()
         }
     }
     
@@ -145,6 +146,38 @@ class VKService {
     }
     
     
+    func saveMyFriendsToRealm(_ newFriends: [GetMyFriends]) {
+        do {
+            let realm = try Realm()
+            print(realm.configuration.fileURL)
+            let oldFriends = realm.objects(GetMyFriends.self)
+            
+            try realm.write {
+                realm.delete(oldFriends)
+                realm.add(newFriends)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func saveMyGroupsToRealm(_ newGroups: [GetMyGroups]) {
+        do {
+            let realm = try Realm()
+            
+            let oldGroups = realm.objects(GetMyGroups.self)
+            
+            try realm.write {
+                realm.delete(oldGroups)
+                realm.add(newGroups)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    
+    // подготовка URL для WebViewController
     func getrequest() -> URLRequest {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -166,6 +199,7 @@ class VKService {
 }
 
 extension UIImageView {
+    // метод для загрузки фото из интенета по URL
     func setImageFromURL(stringImageUrl url: String) {
         if let url = NSURL(string: url) {
             if let data = NSData(contentsOf: url as URL) {
