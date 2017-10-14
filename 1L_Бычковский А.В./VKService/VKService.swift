@@ -38,7 +38,7 @@ class VKService {
             
             let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) }
             
-            self?.saveMyFriendsToRealm(friends)
+            Realm.replaceDataInRealm(toNewObjects: friends)
             
             completion()
         }
@@ -65,7 +65,7 @@ class VKService {
             
             let groups = json["response"]["items"].flatMap { GetMyGroups(json: $0.1) }
             
-            self?.saveMyGroupsToRealm(groups)
+            Realm.replaceDataInRealm(toNewObjects: groups)
             
             completion()
         }
@@ -144,38 +144,7 @@ class VKService {
             
         }
     }
-    
-    
-    func saveMyFriendsToRealm(_ newFriends: [GetMyFriends]) {
-        do {
-            let realm = try Realm()
-            print(realm.configuration.fileURL)
-            let oldFriends = realm.objects(GetMyFriends.self)
-            
-            try realm.write {
-                realm.delete(oldFriends)
-                realm.add(newFriends)
-            }
-        } catch {
-            print(error)
-        }
-    }
-    
-    func saveMyGroupsToRealm(_ newGroups: [GetMyGroups]) {
-        do {
-            let realm = try Realm()
-            
-            let oldGroups = realm.objects(GetMyGroups.self)
-            
-            try realm.write {
-                realm.delete(oldGroups)
-                realm.add(newGroups)
-            }
-        } catch {
-            print(error)
-        }
-    }
-    
+  
     
     // подготовка URL для WebViewController
     func getrequest() -> URLRequest {
@@ -199,13 +168,30 @@ class VKService {
     
 }
 
+   // метод для загрузки фото из интенета по URL
 extension UIImageView {
-    // метод для загрузки фото из интенета по URL
     func setImageFromURL(stringImageUrl url: String) {
         if let url = NSURL(string: url) {
             if let data = NSData(contentsOf: url as URL) {
                 self.image = UIImage(data: data as Data)
             }
+        }
+    }
+}
+
+extension Realm {
+    static func replaceDataInRealm<T: Object>(toNewObjects objects: [T]) {
+        do {
+            let realm = try Realm()
+            
+            let oldObjects = realm.objects(T.self)
+            
+            try realm.write {
+                realm.delete(oldObjects)
+                realm.add(objects)
+            }
+        } catch {
+            print(error)
         }
     }
 }
