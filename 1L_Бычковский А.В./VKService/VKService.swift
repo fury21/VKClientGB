@@ -187,15 +187,16 @@ class VKService {
             URLQueryItem(name: "client_id", value: "6196632"),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
-            URLQueryItem(name: "scope", value: "262150"),
+            URLQueryItem(name: "scope", value: "offline,friends,photos,groups"),
             URLQueryItem(name: "response_type", value: "token"),
             URLQueryItem(name: "v", value: "5.68")
         ]
         
         let request = URLRequest(url: urlComponents.url!)
-        
+    //    print(request)
         return request
     }
+    
 }
 
 extension UIImageView {

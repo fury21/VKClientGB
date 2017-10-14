@@ -12,6 +12,11 @@ import RealmSwift
 
 class MyFriendsController: UITableViewController {
     
+//    @IBAction func logoutVK(_ sender: Any) {
+//            let logout = WebViewController()
+//            logout.logoutVK()
+//    }
+    
     let vKService = VKService()
     var getMyFriends = [GetMyFriends]()
     
@@ -108,9 +113,9 @@ class MyFriendsController: UITableViewController {
             fotoMyFrendCollectionViewController.fullName = selectedFrend[0].friendFullName
             
             fotoMyFrendCollectionViewController.bigPhotoURL = selectedFrend[0].friendPhoto50
-            
         }
     }
+    
     
     /*
      // Override to support rearranging the table view.

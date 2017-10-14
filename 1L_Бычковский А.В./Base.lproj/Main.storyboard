@@ -250,6 +250,7 @@
                             <outlet property="delegate" destination="mgg-yb-Dsa" id="oyR-w3-bsS"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Группы" id="Vj1-gb-55o">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="HOe-Ex-2Za">
                             <connections>
@@ -330,7 +331,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fid-cW-gRT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="7wq-vi-wXp">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -440,11 +441,41 @@
                     <connections>
                         <segue destination="TFb-To-sey" kind="relationship" relationship="viewControllers" id="nj3-JR-RnH"/>
                         <segue destination="OFm-yD-ZSR" kind="relationship" relationship="viewControllers" id="9nY-h6-xfw"/>
+                        <segue destination="Knz-b3-leY" kind="relationship" relationship="viewControllers" id="xm9-df-w8b"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NEv-ew-gQZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="653" y="35"/>
+        </scene>
+        <!--Настройки-->
+        <scene sceneID="ECh-aB-lZ0">
+            <objects>
+                <viewController id="Knz-b3-leY" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nqP-Jm-7Sg"/>
+                        <viewControllerLayoutGuide type="bottom" id="aLp-nZ-BZe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vqD-UG-szh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJa-fz-ZOw">
+                                <rect key="frame" x="42" y="125" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Выход"/>
+                                <connections>
+                                    <segue destination="7yX-8R-wFk" kind="presentation" identifier="logoutVK" id="1Ac-tB-U7x"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Настройки" id="cdP-ai-0fn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dUi-RG-ogC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="652.17391304347836" y="836.41304347826099"/>
         </scene>
         <!--Друзья-->
         <scene sceneID="pAf-yb-hTt">

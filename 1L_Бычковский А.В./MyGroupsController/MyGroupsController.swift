@@ -15,6 +15,9 @@ class MyGroupsController: UITableViewController {
     let vKService = VKService()
     var getMyGroups = [GetMyGroups]()
     
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

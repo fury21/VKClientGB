@@ -12,6 +12,9 @@ import SwiftKeychainWrapper
 
 let userDefaults = UserDefaults.standard
 
+
+
+
 class WebViewController: UIViewController {
     
     var service = VKService()
@@ -22,16 +25,30 @@ class WebViewController: UIViewController {
         }
     }
     
+    func logoutVK() {
+        let dataStore = WKWebsiteDataStore.default()
+        dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { (records) in
+            for record in records {
+                if record.displayName == "vk.com" {
+                    dataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), for: [record], completionHandler: {
+                        //print("Deleted: " + record.displayName);
+                    })
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         webview.load(service.getrequest())
     }
 }
 
 extension WebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        
+     
         
         guard let url = navigationResponse.response.url,
             url.path == "/blank.html",
