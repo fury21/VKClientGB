@@ -36,7 +36,7 @@ class VKService {
             
             let json = JSON(data)
             
-            let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) }
+            let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) } ?? []
             
             Realm.replaceDataInRealm(toNewObjects: friends)
             
@@ -63,7 +63,7 @@ class VKService {
             
             let json = JSON(data)
             
-            let groups = json["response"]["items"].flatMap { GetMyGroups(json: $0.1) }
+            let groups = json["response"]["items"].flatMap { GetMyGroups(json: $0.1) } ?? []
             
             Realm.replaceDataInRealm(toNewObjects: groups)
             
@@ -111,7 +111,7 @@ class VKService {
             
             let json = JSON(data)
             
-            let q = json["response"]["items"].flatMap { SearchGroups(json: $0.1) }
+            let q = json["response"]["items"].flatMap { SearchGroups(json: $0.1) } ?? []
             
             completion(q)
         }
