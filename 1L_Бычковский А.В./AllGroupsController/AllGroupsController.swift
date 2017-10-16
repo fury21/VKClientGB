@@ -12,7 +12,7 @@ class AllGroupsController: UITableViewController, UISearchBarDelegate {
     
     
     let vKService = VKService()
-    var searchMyGroup = [SearchGroups]()
+    var searchMyGroup = [GetMyGroups]()
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -47,7 +47,7 @@ class AllGroupsController: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllGroupsCell", for: indexPath) as! AllGroupsCell
         
         cell.groupName.text = searchMyGroup[indexPath.row].groupName
-        cell.groupImg.setImageFromURL(stringImageUrl: searchMyGroup[indexPath.row].groupImg50)
+        cell.groupImg.setImageFromURL(stringImageUrl: searchMyGroup[indexPath.row].groupPhoto50)
         
         return cell
     }

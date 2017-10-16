@@ -10,7 +10,7 @@ import UIKit
 
 class VKViewController: UICollectionViewController {
 
-    var fullName   = ""
+    var fullName = ""
     var bigPhotoURL = ""
     
     //создаем экземпляр сервиса
@@ -20,7 +20,6 @@ class VKViewController: UICollectionViewController {
         super.viewDidLoad()
         self.title = fullName
         
-        //отправим запрос для получения погоды для москвы
         //vKService.loadVKAnyFriends(vKId: vKService.myVkId) // получаем список и фото моих друзей
     }
 

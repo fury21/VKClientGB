@@ -13,20 +13,18 @@ import RealmSwift
 class MyGroupsController: UITableViewController {
     
     let vKService = VKService()
-    var getMyGroups = [GetMyGroups]()
+    var getMyGroups: Results<GetMyGroups>?
     
-
+    var notificationToken: NotificationToken?
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadGroupsFromRealm()
-       
-        vKService.loadVKAnyGroups(vKId: vKService.userVkId) { [weak self] in
-            self?.loadGroupsFromRealm()
-            self?.tableView?.reloadData()
-        }
+        pairTableAndRealm()
+        
+        vKService.loadVKAnyGroups(vKId: vKService.userVkId)
         
         
         // Uncomment the following line to preserve selection between presentations
@@ -36,13 +34,27 @@ class MyGroupsController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    func loadGroupsFromRealm() {
-        do {
-            let realm = try Realm()
-            let realmroups = realm.objects(GetMyGroups.self)
-            self.getMyGroups = Array(realmroups)
-        } catch {
-            print(error)
+    func pairTableAndRealm() {
+        guard let realm = try? Realm() else { return }
+        getMyGroups = realm.objects(GetMyGroups.self)
+        
+        notificationToken = getMyGroups?.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.tableView else { return }
+            
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                tableView.beginUpdates()
+                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                tableView.endUpdates()
+                break
+            case .error(let error):
+                fatalError("\(error)")
+                break
+            }
         }
     }
     
@@ -55,14 +67,18 @@ class MyGroupsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return getMyGroups.count
+        return getMyGroups?.count ?? 0
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroupsCell", for: indexPath) as! MyGroupsCell
         
-        let groups = getMyGroups[indexPath.row]
+        guard let groups = getMyGroups?[indexPath.row] else {
+            cell.textLabel?.text = ""
+            return cell
+        }
+        
         cell.myGroupLabel.text = groups.groupName
         
         cell.myGroupImage?.setImageFromURL(stringImageUrl: groups.groupPhoto50)
@@ -70,8 +86,8 @@ class MyGroupsController: UITableViewController {
         cell.myGroupImage.layer.masksToBounds = true
         cell.myGroupImage.layer.cornerRadius = 25
         
-//        cell.myGroupImage.layer.borderColor = UIColor.black.cgColor
-//        cell.myGroupImage.layer.borderWidth = 0.5
+        //        cell.myGroupImage.layer.borderColor = UIColor.black.cgColor
+        //        cell.myGroupImage.layer.borderWidth = 0.5
         
         
         return cell
@@ -82,21 +98,19 @@ class MyGroupsController: UITableViewController {
         if segue.identifier == "addGroup" {
             //получаем ссылку на контроллер с которого осуществлен переход
             let allGroupsController = segue.source as! AllGroupsController
-
+            
             //получаем индекс выделенной ячейки
             if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
                 //получаем город по индксу
                 let group = allGroupsController.searchMyGroup[indexPath.row]
-              
+                
                 //Проверяем что такого города нет в списке
-                if !getMyGroups.contains(where: { $0.groupId == group.groupId } ) {
+                if !(getMyGroups?.contains(where: { $0.id == group.id } ))! {
                     //добавляем город в список выбранных городов
                     
-                    vKService.joinAndLeaveAnyGroup(groupId: group.groupId, action: .joinGroup)
-                    getMyGroups.append(GetMyGroups(groupId: group.groupId, groupName: group.groupName, groupPhoto50: group.groupImg50))
+                    vKService.joinAndLeaveAnyGroup(groupId: group.id, action: .joinGroup)
                     
-                    //обновляем таблицу
-                    tableView.reloadData()
+                    Realm.addDataToRealm(objects: [group])
                 }
             }
         }
@@ -118,9 +132,9 @@ class MyGroupsController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             
-            vKService.joinAndLeaveAnyGroup(groupId: getMyGroups[indexPath.row].groupId, action: .leaveGroup)
-            getMyGroups.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            vKService.joinAndLeaveAnyGroup(groupId: getMyGroups![indexPath.row].id, action: .leaveGroup)
+            
+            Realm.deleteDataFromRealm(objects: [getMyGroups![indexPath.row]])
         }
     }
     

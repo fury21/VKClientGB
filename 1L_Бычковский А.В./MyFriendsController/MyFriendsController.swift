@@ -12,23 +12,17 @@ import RealmSwift
 
 class MyFriendsController: UITableViewController {
     
-//    @IBAction func logoutVK(_ sender: Any) {
-//            let logout = WebViewController()
-//            logout.logoutVK()
-//    }
-    
     let vKService = VKService()
-    var getMyFriends = [GetMyFriends]()
+    var getMyFriends: Results<GetMyFriends>?
+    
+    var notificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadFriendsFromRealm()
-        
-        vKService.loadVKAnyFriends(vKId: vKService.userVkId) { [weak self] in
-            self?.loadFriendsFromRealm()
-            self?.tableView?.reloadData()
-        }
+        pairTableAndRealm()
+
+        vKService.loadVKAnyFriends(vKId: vKService.userVkId)
         
         
         // Uncomment the following line to preserve selection between presentations
@@ -38,16 +32,30 @@ class MyFriendsController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    func loadFriendsFromRealm() {
-        do {
-            let realm = try Realm()
-            let realmFriends = realm.objects(GetMyFriends.self)
-            self.getMyFriends = Array(realmFriends)
-        } catch {
-            print(error)
+    func pairTableAndRealm() {
+        guard let realm = try? Realm() else { return }
+        getMyFriends = realm.objects(GetMyFriends.self)
+        
+        notificationToken = getMyFriends?.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.tableView else { return }
+            
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                tableView.beginUpdates()
+                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                tableView.endUpdates()
+                break
+            case .error(let error):
+                fatalError("\(error)")
+                break
+            }
         }
     }
-    
+  
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,17 +65,20 @@ class MyFriendsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return getMyFriends.count
+        return getMyFriends?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
         
-        let friends = getMyFriends[indexPath.row]
+        guard let friends = getMyFriends?[indexPath.row] else {
+            cell.textLabel?.text = ""
+            return cell
+        }
         
         cell.myFriendLabel.text = friends.friendFullName
         
-        cell.idFriend = getMyFriends[indexPath.row].friendId
+        cell.idFriend = friends.id
         
         cell.myFriendOnlineStatus.layer.masksToBounds = true
         cell.myFriendOnlineStatus.image = UIImage(named: friends.frindsOnlineStatus)
@@ -93,8 +104,7 @@ class MyFriendsController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            getMyFriends.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+              Realm.deleteDataFromRealm(objects: [getMyFriends![indexPath.row]])
         }
     }
     
@@ -103,18 +113,41 @@ class MyFriendsController: UITableViewController {
             
             let cell = sender as! MyFriendsCell
             
-            let selectedFrend = getMyFriends.filter({ $0.friendId == cell.idFriend
+            let selectedFriend = getMyFriends?.filter({ $0.id == cell.idFriend
             })
             
-            if selectedFrend.count == 0 {
+            if selectedFriend?.count == 0 {
                 fatalError()
             }
             let fotoMyFrendCollectionViewController = segue.destination as! VKViewController
-            fotoMyFrendCollectionViewController.fullName = selectedFrend[0].friendFullName
+            fotoMyFrendCollectionViewController.fullName = selectedFriend![0].friendFullName
             
-            fotoMyFrendCollectionViewController.bigPhotoURL = selectedFrend[0].friendPhoto50
+            fotoMyFrendCollectionViewController.bigPhotoURL = selectedFriend![0].friendPhoto50
         }
     }
+    
+//    {
+//    //Проверяем идентификатор перехода, что бы убедится что это нужныий переход
+//    if segue.identifier == "addGroup" {
+//    //получаем ссылку на контроллер с которого осуществлен переход
+//    let allGroupsController = segue.source as! AllGroupsController
+//
+//    //получаем индекс выделенной ячейки
+//    if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
+//    //получаем город по индксу
+//    let group = allGroupsController.searchMyGroup[indexPath.row]
+//
+//    //Проверяем что такого города нет в списке
+//    if !(getMyGroups?.contains(where: { $0.id == group.id } ))! {
+//    //добавляем город в список выбранных городов
+//
+//    vKService.joinAndLeaveAnyGroup(groupId: group.id, action: .joinGroup)
+//
+//    Realm.addDataToRealm(objects: [group])
+//    }
+//    }
+//    }
+//    }
     
     
     /*

@@ -11,27 +11,19 @@ import SwiftyJSON
 import RealmSwift
 
 class GetMyGroups: Object {
-    @objc dynamic var groupId = 0
+    @objc dynamic var id = 0
     @objc dynamic var groupName = ""
     var groupIsClosed = [Int]()
     @objc dynamic var groupPhoto50 = ""
     
-    convenience init(groupId: Int, groupName: String, groupPhoto50: String) {
-        self.init()
-        self.groupId = groupId
-        self.groupName = groupName
-        self.groupPhoto50 = groupPhoto50
-        
-    }
-    
     convenience init(json: JSON) {
         self.init()
-        groupId = json["id"].intValue
+        id = json["id"].intValue
         groupName = json["name"].stringValue
         groupPhoto50 = json["photo_50"].stringValue
     }
     
     override static func primaryKey() -> String {
-        return "groupId"
+        return "id"
     }
 }

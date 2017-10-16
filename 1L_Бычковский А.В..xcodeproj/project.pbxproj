@@ -8,15 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		153223EDA3772CBCF53FE822 /* Pods_1L_________________.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30CA2B9570432FAE6FE9FBB1 /* Pods_1L_________________.framework */; };
-		380382401F81366C00CB63D4 /* SearchGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3803823F1F81366C00CB63D4 /* SearchGroups.swift */; };
 		380FE7BC1F76AA5B00529ECA /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FE7BB1F76AA5B00529ECA /* VKService.swift */; };
-		381D1B441F925304001BF082 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381D1B431F925304001BF082 /* Settings.swift */; };
 		38569B071F8018A1001AD141 /* GetMyGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B061F8018A1001AD141 /* GetMyGroups.swift */; };
 		38569B0C1F8118AA001AD141 /* MyFriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0B1F8118AA001AD141 /* MyFriendsController.swift */; };
 		38569B0E1F811947001AD141 /* MyFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0D1F811947001AD141 /* MyFriendsCell.swift */; };
 		38569B101F811E19001AD141 /* GetMyFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0F1F811E19001AD141 /* GetMyFriends.swift */; };
 		386244341F8264700013E479 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386244331F8264700013E479 /* WebViewController.swift */; };
 		389CF0F81F74792700B8A4C9 /* MyGroupsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389CF0F71F74792700B8A4C9 /* MyGroupsCell.swift */; };
+		38A205BB1F951A910068B1DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A205BA1F951A910068B1DC /* SettingsViewController.swift */; };
 		38E3A1F41F6989B800F536F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E3A1F31F6989B800F536F8 /* AppDelegate.swift */; };
 		38E3A1F91F6989B800F536F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38E3A1F71F6989B800F536F8 /* Main.storyboard */; };
 		38E3A1FB1F6989B800F536F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38E3A1FA1F6989B800F536F8 /* Assets.xcassets */; };
@@ -31,15 +30,14 @@
 
 /* Begin PBXFileReference section */
 		30CA2B9570432FAE6FE9FBB1 /* Pods_1L_________________.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_1L_________________.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3803823F1F81366C00CB63D4 /* SearchGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGroups.swift; sourceTree = "<group>"; };
 		380FE7BB1F76AA5B00529ECA /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
-		381D1B431F925304001BF082 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		38569B061F8018A1001AD141 /* GetMyGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyGroups.swift; sourceTree = "<group>"; };
 		38569B0B1F8118AA001AD141 /* MyFriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsController.swift; sourceTree = "<group>"; };
 		38569B0D1F811947001AD141 /* MyFriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsCell.swift; sourceTree = "<group>"; };
 		38569B0F1F811E19001AD141 /* GetMyFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyFriends.swift; sourceTree = "<group>"; };
 		386244331F8264700013E479 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		389CF0F71F74792700B8A4C9 /* MyGroupsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsCell.swift; sourceTree = "<group>"; };
+		38A205BA1F951A910068B1DC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		38E3A1F01F6989B800F536F8 /* 1L_Бычковский А.В..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "1L_Бычковский А.В..app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38E3A1F31F6989B800F536F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38E3A1F81F6989B800F536F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,7 +85,7 @@
 		381D1B421F9252EB001BF082 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				381D1B431F925304001BF082 /* Settings.swift */,
+				38A205BA1F951A910068B1DC /* SettingsViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -123,8 +121,8 @@
 		38E3A1F21F6989B800F536F8 /* 1L_Бычковский А.В. */ = {
 			isa = PBXGroup;
 			children = (
-				381D1B421F9252EB001BF082 /* Settings */,
 				380FE7BA1F76AA2100529ECA /* VKService */,
+				381D1B421F9252EB001BF082 /* Settings */,
 				38569B081F811854001AD141 /* MyFriendsController */,
 				38FE7F741F73D03F00EFDF92 /* VK */,
 				38FE7F6F1F7319EB00EFDF92 /* MyGroupsController */,
@@ -155,7 +153,6 @@
 				38FE7F721F731A6E00EFDF92 /* MyGroupsController.swift */,
 				389CF0F71F74792700B8A4C9 /* MyGroupsCell.swift */,
 				38569B061F8018A1001AD141 /* GetMyGroups.swift */,
-				3803823F1F81366C00CB63D4 /* SearchGroups.swift */,
 			);
 			path = MyGroupsController;
 			sourceTree = "<group>";
@@ -326,12 +323,11 @@
 				38FE7F761F73D06300EFDF92 /* VKViewController.swift in Sources */,
 				38569B0E1F811947001AD141 /* MyFriendsCell.swift in Sources */,
 				380FE7BC1F76AA5B00529ECA /* VKService.swift in Sources */,
-				381D1B441F925304001BF082 /* Settings.swift in Sources */,
 				38FE7F6E1F730D3200EFDF92 /* AllGroupsCell.swift in Sources */,
-				380382401F81366C00CB63D4 /* SearchGroups.swift in Sources */,
 				38FE7F781F73D0A600EFDF92 /* VKCell.swift in Sources */,
 				38E3A1F41F6989B800F536F8 /* AppDelegate.swift in Sources */,
 				386244341F8264700013E479 /* WebViewController.swift in Sources */,
+				38A205BB1F951A910068B1DC /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -451,7 +451,7 @@
         <!--Настройки-->
         <scene sceneID="ECh-aB-lZ0">
             <objects>
-                <viewController id="Knz-b3-leY" sceneMemberID="viewController">
+                <viewController id="Knz-b3-leY" customClass="SettingsViewController" customModule="_L_Бычковскии__А_В_" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nqP-Jm-7Sg"/>
                         <viewControllerLayoutGuide type="bottom" id="aLp-nZ-BZe"/>

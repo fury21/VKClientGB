@@ -19,7 +19,7 @@ class VKService {
     
     
     // список друзей по id
-    func loadVKAnyFriends(vKId: Int, completion: @escaping () -> Void) {
+    func loadVKAnyFriends(vKId: Int) {
         let path = "/method/friends.get"
         
         let parameters: Parameters = [
@@ -31,22 +31,20 @@ class VKService {
         
         let url = baseUrl + path
         
-        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { [weak self] response in
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             guard let data = response.value else { return }
             
             let json = JSON(data)
             
-            let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) } ?? []
+            let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) }
             
-            Realm.replaceDataInRealm(toNewObjects: friends)
-            
-            completion()
+            if !checkNewDataInRealm(jsonForGroups: nil, jsonForFriends: friends) { Realm.replaceDataInRealm(toNewObjects: friends) }            
         }
     }
     
     
     // список групп по id
-    func loadVKAnyGroups(vKId: Int, completion: @escaping () -> Void) {
+    func loadVKAnyGroups(vKId: Int) {
         let path = "/method/groups.get"
         
         let parameters: Parameters = [
@@ -58,16 +56,14 @@ class VKService {
         
         let url = baseUrl + path
         
-        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { [weak self] response in
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             guard let data = response.value else { return }
             
             let json = JSON(data)
             
-            let groups = json["response"]["items"].flatMap { GetMyGroups(json: $0.1) } ?? []
+            let groups = json["response"]["items"].map { GetMyGroups(json: $0.1) }
             
-            Realm.replaceDataInRealm(toNewObjects: groups)
-            
-            completion()
+            if !checkNewDataInRealm(jsonForGroups: groups, jsonForFriends: nil) { Realm.replaceDataInRealm(toNewObjects: groups) }
         }
     }
     
@@ -92,7 +88,7 @@ class VKService {
     }
     
     // поиск новых групп по имени
-    func searchVKAnyGroups(q: String, completion: @escaping ([SearchGroups]) -> Void) {
+    func searchVKAnyGroups(q: String, completion: @escaping ([GetMyGroups]) -> Void) {
         let path = "/method/groups.search"
         
         let parameters: Parameters = [
@@ -111,7 +107,7 @@ class VKService {
             
             let json = JSON(data)
             
-            let q = json["response"]["items"].flatMap { SearchGroups(json: $0.1) } ?? []
+            let q = json["response"]["items"].flatMap { GetMyGroups(json: $0.1) }
             
             completion(q)
         }
@@ -144,7 +140,7 @@ class VKService {
             
         }
     }
-  
+    
     
     // подготовка URL для WebViewController
     func getrequest() -> URLRequest {
@@ -153,7 +149,7 @@ class VKService {
         urlComponents.host = "oauth.vk.com"
         urlComponents.path = "/authorize"
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: "6196632"),
+            URLQueryItem(name: "client_id", value: String(appId)),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "scope", value: "offline,friends,photos,groups"),
@@ -162,13 +158,13 @@ class VKService {
         ]
         
         let request = URLRequest(url: urlComponents.url!)
-    //    print(request)
+        //    print(request)
         return request
     }
     
 }
 
-   // метод для загрузки фото из интенета по URL
+// метод для загрузки фото из интенета по URL
 extension UIImageView {
     func setImageFromURL(stringImageUrl url: String) {
         if let url = NSURL(string: url) {
@@ -179,10 +175,46 @@ extension UIImageView {
     }
 }
 
+func checkNewDataInRealm(jsonForGroups: [GetMyGroups]?, jsonForFriends: [GetMyFriends]?) -> Bool {
+    var setTrue = 0
+    do {
+        if jsonForFriends == nil || jsonForGroups != nil {
+            let realm = try Realm()
+            let objects = realm.objects(GetMyGroups.self)
+            
+            let set1 = Set(objects)
+            let set2 = Set(jsonForGroups!)
+            
+            if objects.count == jsonForGroups!.count || Set(set1.map{$0.id}).symmetricDifference(Set(set2.map{$0.id})) == [] {
+                setTrue = 1
+            } else {
+                setTrue = 0
+            }
+        } else if jsonForFriends != nil || jsonForGroups == nil {
+            let realm = try Realm()
+            let objects = realm.objects(GetMyFriends.self)
+            
+            let set1 = Set(objects)
+            let set2 = Set(jsonForFriends!)
+            
+            if objects.count == jsonForFriends!.count || Set(set1.map{$0.id}).symmetricDifference(Set(set2.map{$0.id})) == [] {
+                setTrue = 1
+            } else {
+                setTrue = 0
+            }
+        }
+    } catch {
+        print(error)
+    }
+    if setTrue == 1 { return true } else { return false }
+}
+
 extension Realm {
     static func replaceDataInRealm<T: Object>(toNewObjects objects: [T]) {
         do {
             let realm = try Realm()
+            
+            print(realm.configuration.fileURL!)
             
             let oldObjects = realm.objects(T.self)
             
@@ -194,4 +226,29 @@ extension Realm {
             print(error)
         }
     }
+    
+    static func addDataToRealm<T: Object>(objects: [T]) {
+        do {
+            let realm = try Realm()
+            
+            try realm.write {
+                realm.add(objects)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    static func deleteDataFromRealm<T: Object>(objects: [T]) {
+        do {
+            let realm = try Realm()
+            
+            try realm.write {
+                realm.delete(objects)
+            }
+        } catch {
+            print(error)
+        }
+    }
 }
+

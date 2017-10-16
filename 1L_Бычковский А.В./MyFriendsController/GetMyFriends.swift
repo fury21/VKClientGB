@@ -11,20 +11,20 @@ import SwiftyJSON
 import RealmSwift
 
 class GetMyFriends: Object {
-    @objc dynamic var friendId = 0
+    @objc dynamic var id = 0
     @objc dynamic var friendFullName = ""
     @objc dynamic var friendPhoto50 = ""
     @objc dynamic var frindsOnlineStatus = "offline"
     
     convenience init(json: JSON) {
         self.init()
-        friendId = json["id"].intValue
+        id = json["id"].intValue
         friendFullName = json["first_name"].stringValue + " " + json["last_name"].stringValue
         friendPhoto50 = json["photo_50"].stringValue
         if json["online"].intValue == 1 { frindsOnlineStatus = "online" } else { frindsOnlineStatus = "offline" }
     }
     
     override static func primaryKey() -> String {
-        return "friendId"
+        return "id"
     }
 }
