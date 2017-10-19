@@ -26,7 +26,6 @@ class MyGroupsController: UITableViewController {
         
         vKService.loadVKAnyGroups(vKId: vKService.userVkId)
         
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         

@@ -14,10 +14,15 @@
 		38569B0E1F811947001AD141 /* MyFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0D1F811947001AD141 /* MyFriendsCell.swift */; };
 		38569B101F811E19001AD141 /* GetMyFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0F1F811E19001AD141 /* GetMyFriends.swift */; };
 		386244341F8264700013E479 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386244331F8264700013E479 /* WebViewController.swift */; };
+		3864DF701F96268000C4C8FB /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3864DF6F1F96268000C4C8FB /* Groups.storyboard */; };
+		3864DF721F96289E00C4C8FB /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3864DF711F96289E00C4C8FB /* Friends.storyboard */; };
+		38802DBD1F963BC400C39A9A /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38802DBC1F963BC400C39A9A /* Settings.storyboard */; };
+		38802DBF1F963D2300C39A9A /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38802DBE1F963D2300C39A9A /* Messages.storyboard */; };
+		38802DC11F963DAF00C39A9A /* LoginForm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38802DC01F963DAF00C39A9A /* LoginForm.storyboard */; };
+		38985D721F97A88B004062EF /* NewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38985D711F97A88B004062EF /* NewsFeed.storyboard */; };
 		389CF0F81F74792700B8A4C9 /* MyGroupsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389CF0F71F74792700B8A4C9 /* MyGroupsCell.swift */; };
 		38A205BB1F951A910068B1DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A205BA1F951A910068B1DC /* SettingsViewController.swift */; };
 		38E3A1F41F6989B800F536F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E3A1F31F6989B800F536F8 /* AppDelegate.swift */; };
-		38E3A1F91F6989B800F536F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38E3A1F71F6989B800F536F8 /* Main.storyboard */; };
 		38E3A1FB1F6989B800F536F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38E3A1FA1F6989B800F536F8 /* Assets.xcassets */; };
 		38E3A1FE1F6989B800F536F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38E3A1FC1F6989B800F536F8 /* LaunchScreen.storyboard */; };
 		38E3A2061F6994C200F536F8 /* LoginFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E3A2051F6994C200F536F8 /* LoginFormController.swift */; };
@@ -36,11 +41,16 @@
 		38569B0D1F811947001AD141 /* MyFriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsCell.swift; sourceTree = "<group>"; };
 		38569B0F1F811E19001AD141 /* GetMyFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyFriends.swift; sourceTree = "<group>"; };
 		386244331F8264700013E479 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		3864DF6F1F96268000C4C8FB /* Groups.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Groups.storyboard; sourceTree = "<group>"; };
+		3864DF711F96289E00C4C8FB /* Friends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
+		38802DBC1F963BC400C39A9A /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		38802DBE1F963D2300C39A9A /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
+		38802DC01F963DAF00C39A9A /* LoginForm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginForm.storyboard; sourceTree = "<group>"; };
+		38985D711F97A88B004062EF /* NewsFeed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewsFeed.storyboard; sourceTree = "<group>"; };
 		389CF0F71F74792700B8A4C9 /* MyGroupsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsCell.swift; sourceTree = "<group>"; };
 		38A205BA1F951A910068B1DC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		38E3A1F01F6989B800F536F8 /* 1L_Бычковский А.В..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "1L_Бычковский А.В..app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38E3A1F31F6989B800F536F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		38E3A1F81F6989B800F536F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		38E3A1FA1F6989B800F536F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38E3A1FD1F6989B800F536F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38E3A1FF1F6989B800F536F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,6 +110,26 @@
 			path = MyFriendsController;
 			sourceTree = "<group>";
 		};
+		3864DF691F961E4600C4C8FB /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				38802DC01F963DAF00C39A9A /* LoginForm.storyboard */,
+				38985D711F97A88B004062EF /* NewsFeed.storyboard */,
+				3864DF711F96289E00C4C8FB /* Friends.storyboard */,
+				3864DF6F1F96268000C4C8FB /* Groups.storyboard */,
+				38802DBE1F963D2300C39A9A /* Messages.storyboard */,
+				38802DBC1F963BC400C39A9A /* Settings.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		3864DF6E1F96236700C4C8FB /* Newsfeed */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Newsfeed;
+			sourceTree = "<group>";
+		};
 		38E3A1E71F6989B800F536F8 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +151,7 @@
 		38E3A1F21F6989B800F536F8 /* 1L_Бычковский А.В. */ = {
 			isa = PBXGroup;
 			children = (
+				3864DF6E1F96236700C4C8FB /* Newsfeed */,
 				380FE7BA1F76AA2100529ECA /* VKService */,
 				381D1B421F9252EB001BF082 /* Settings */,
 				38569B081F811854001AD141 /* MyFriendsController */,
@@ -131,7 +162,7 @@
 				38E3A2051F6994C200F536F8 /* LoginFormController.swift */,
 				386244331F8264700013E479 /* WebViewController.swift */,
 				38E3A1FA1F6989B800F536F8 /* Assets.xcassets */,
-				38E3A1F71F6989B800F536F8 /* Main.storyboard */,
+				3864DF691F961E4600C4C8FB /* Storyboard */,
 				38E3A1FC1F6989B800F536F8 /* LaunchScreen.storyboard */,
 				38E3A1FF1F6989B800F536F8 /* Info.plist */,
 			);
@@ -239,8 +270,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				38E3A1FE1F6989B800F536F8 /* LaunchScreen.storyboard in Resources */,
+				3864DF721F96289E00C4C8FB /* Friends.storyboard in Resources */,
+				38802DBF1F963D2300C39A9A /* Messages.storyboard in Resources */,
+				38985D721F97A88B004062EF /* NewsFeed.storyboard in Resources */,
+				38802DBD1F963BC400C39A9A /* Settings.storyboard in Resources */,
+				3864DF701F96268000C4C8FB /* Groups.storyboard in Resources */,
+				38802DC11F963DAF00C39A9A /* LoginForm.storyboard in Resources */,
 				38E3A1FB1F6989B800F536F8 /* Assets.xcassets in Resources */,
-				38E3A1F91F6989B800F536F8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,14 +370,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		38E3A1F71F6989B800F536F8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				38E3A1F81F6989B800F536F8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		38E3A1FC1F6989B800F536F8 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

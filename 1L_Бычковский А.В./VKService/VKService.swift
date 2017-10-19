@@ -38,7 +38,28 @@ class VKService {
             
             let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) }
             
-            if !checkNewDataInRealm(jsonForGroups: nil, jsonForFriends: friends) { Realm.replaceDataInRealm(toNewObjects: friends) }            
+            if !checkNewDataInRealm(jsonForGroups: nil, jsonForFriends: friends) { Realm.replaceDataInRealm(toNewObjects: friends) }
+        }
+    }
+    
+    // удаляет из друзей по id
+    func deleteVKFromFriends(idFriendToDel: Int) {
+        let path = "/method/friends.delete"
+        
+        let parameters: Parameters = [
+            "user_id": idFriendToDel,
+            "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
+            "v": "5.68"
+        ]
+        
+        let url = baseUrl + path
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
+//            guard let data = response.value else { return }
+
+//            Пока входящий json не обрабатывается
+//            let json = JSON(data)
+//            let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) }
         }
     }
     
@@ -214,7 +235,7 @@ extension Realm {
         do {
             let realm = try Realm()
             
-            print(realm.configuration.fileURL!)
+            
             
             let oldObjects = realm.objects(T.self)
             
@@ -230,7 +251,7 @@ extension Realm {
     static func addDataToRealm<T: Object>(objects: [T]) {
         do {
             let realm = try Realm()
-            
+            print(realm.configuration.fileURL!)
             try realm.write {
                 realm.add(objects)
             }
@@ -242,6 +263,8 @@ extension Realm {
     static func deleteDataFromRealm<T: Object>(objects: [T]) {
         do {
             let realm = try Realm()
+            
+            print(realm.configuration.fileURL!)
             
             try realm.write {
                 realm.delete(objects)

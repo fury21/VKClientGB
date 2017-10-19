@@ -21,7 +21,7 @@ class MyFriendsController: UITableViewController {
         super.viewDidLoad()
         
         pairTableAndRealm()
-
+        
         vKService.loadVKAnyFriends(vKId: vKService.userVkId)
         
         
@@ -55,7 +55,7 @@ class MyFriendsController: UITableViewController {
             }
         }
     }
-  
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -104,51 +104,26 @@ class MyFriendsController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-              Realm.deleteDataFromRealm(objects: [getMyFriends![indexPath.row]])
+            vKService.deleteVKFromFriends(idFriendToDel: getMyFriends![indexPath.row].id)
+            Realm.deleteDataFromRealm(objects: [getMyFriends![indexPath.row]])
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "segueMyFrend" {
-            
             let cell = sender as! MyFriendsCell
             
-            let selectedFriend = getMyFriends?.filter({ $0.id == cell.idFriend
-            })
+            let selectedFriend = Array(getMyFriends!).filter({ $0.id == cell.idFriend })
             
-            if selectedFriend?.count == 0 {
+            if selectedFriend.count == 0 {
                 fatalError()
             }
-            let fotoMyFrendCollectionViewController = segue.destination as! VKViewController
-            fotoMyFrendCollectionViewController.fullName = selectedFriend![0].friendFullName
-            
-            fotoMyFrendCollectionViewController.bigPhotoURL = selectedFriend![0].friendPhoto50
+            let ctrl = segue.destination as! VKViewController
+            ctrl.fullName = selectedFriend[0].friendFullName
+            ctrl.bigPhotoURL = selectedFriend[0].friendPhoto50
         }
     }
-    
-//    {
-//    //Проверяем идентификатор перехода, что бы убедится что это нужныий переход
-//    if segue.identifier == "addGroup" {
-//    //получаем ссылку на контроллер с которого осуществлен переход
-//    let allGroupsController = segue.source as! AllGroupsController
-//
-//    //получаем индекс выделенной ячейки
-//    if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-//    //получаем город по индксу
-//    let group = allGroupsController.searchMyGroup[indexPath.row]
-//
-//    //Проверяем что такого города нет в списке
-//    if !(getMyGroups?.contains(where: { $0.id == group.id } ))! {
-//    //добавляем город в список выбранных городов
-//
-//    vKService.joinAndLeaveAnyGroup(groupId: group.id, action: .joinGroup)
-//
-//    Realm.addDataToRealm(objects: [group])
-//    }
-//    }
-//    }
-//    }
-    
     
     /*
      // Override to support rearranging the table view.

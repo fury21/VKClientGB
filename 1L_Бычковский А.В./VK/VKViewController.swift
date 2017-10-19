@@ -13,6 +13,8 @@ class VKViewController: UICollectionViewController {
     var fullName = ""
     var bigPhotoURL = ""
     
+    
+    
     //создаем экземпляр сервиса
     let vKService = VKService()
     
@@ -54,7 +56,7 @@ class VKViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VKCell", for: indexPath) as! VKCell
     
-        
+        cell.vk.text = fullName
         cell.friendImg.setImageFromURL(stringImageUrl: bigPhotoURL)
 
         return cell
