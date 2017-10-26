@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftKeychainWrapper
 import RealmSwift
 
 class MyFriendsController: UITableViewController {
@@ -19,7 +18,7 @@ class MyFriendsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+     
         pairTableAndRealm()
         
         vKService.loadVKAnyFriends(vKId: vKService.userVkId)
@@ -36,7 +35,7 @@ class MyFriendsController: UITableViewController {
         guard let realm = try? Realm() else { return }
         getMyFriends = realm.objects(GetMyFriends.self)
         
-        notificationToken = getMyFriends?.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+        notificationToken = getMyFriends?.observe { [weak self] (changes: RealmCollectionChange) in
             guard let tableView = self?.tableView else { return }
             
             switch changes {
@@ -82,11 +81,11 @@ class MyFriendsController: UITableViewController {
         
         cell.myFriendOnlineStatus.layer.masksToBounds = true
         cell.myFriendOnlineStatus.image = UIImage(named: friends.frindsOnlineStatus)
-        cell.myFriendOnlineStatus.layer.cornerRadius = 5
+        cell.myFriendOnlineStatus.layer.cornerRadius = cell.myFriendImage.frame.size.height / 2
         
         cell.myFriendImage.layer.masksToBounds = true
         cell.myFriendImage?.setImageFromURL(stringImageUrl: friends.friendPhoto50)
-        cell.myFriendImage.layer.cornerRadius = 25
+        cell.myFriendImage.layer.cornerRadius = cell.myFriendImage.frame.size.height / 2
         
         return cell
     }

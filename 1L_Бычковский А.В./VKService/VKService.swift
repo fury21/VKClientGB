@@ -15,7 +15,7 @@ class VKService {
     // параметры API ВКонтакте	
     let baseUrl = "https://api.vk.com"
     let userVkId = userDefaults.integer(forKey: "vkApiUser_id") // id страницы авторизованного пользователя
-    let appId = 6195650 // id приложения в ВК
+    let appId = 6232209 // id приложения в ВК
     
     
     // список друзей по id
@@ -162,6 +162,56 @@ class VKService {
         }
     }
     
+    func loadVKFeedNews() {
+        let path = "/method/newsfeed.get"
+        
+        let parameters: Parameters = [
+            "filters": "post",
+            "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
+            "v": "5.68"
+        ]
+        
+        let url = baseUrl + path
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
+            guard let data = response.value else { return }
+            
+            let json = JSON(data)
+            
+            var newsFeed = json["response"]["items"].flatMap { GetMyNewsFeed(json: $0.1) }
+            let newsFeed1 = json["response"]["profiles"].flatMap { GetMyNewsFeed(jsonTitlePostPhotoAndLabelUser: $0.1) }
+            let newsFeed2 = json["response"]["groups"].flatMap { GetMyNewsFeed(jsonTitlePostPhotoAndLabelGroup: $0.1) }
+            
+            print("1+", newsFeed)
+            print("1++", newsFeed1)
+            print("1+++", newsFeed2)
+            
+            for i in 0..<newsFeed.count {
+                if newsFeed[i].postSource_id < 0 {
+                    for ii in 0..<newsFeed2.count {
+                        if newsFeed[i].postSource_id * -1 == newsFeed2[ii].titlePostId {
+                            newsFeed[i].titlePostId = newsFeed2[ii].titlePostId
+                            newsFeed[i].titlePostLabel = newsFeed2[ii].titlePostLabel
+                            newsFeed[i].titlePostPhoto = newsFeed2[ii].titlePostPhoto
+                        }
+                    }
+                } else {
+                    for iii in 0..<newsFeed1.count {
+                        if newsFeed[i].postSource_id == newsFeed1[iii].titlePostId {
+                            newsFeed[i].titlePostId = newsFeed1[iii].titlePostId
+                            newsFeed[i].titlePostLabel = newsFeed1[iii].titlePostLabel
+                            newsFeed[i].titlePostPhoto = newsFeed1[iii].titlePostPhoto
+                        }
+                    }
+                }
+            }
+            print("++++", newsFeed)
+            
+//            if !checkNewDataInRealm(jsonForGroups: nil, jsonForFriends: newsFeed) { Realm.replaceDataInRealm(toNewObjects: newsFeed) }
+            Realm.replaceDataInRealm(toNewObjects: newsFeed)
+        }
+    }
+    
     
     // подготовка URL для WebViewController
     func getrequest() -> URLRequest {
@@ -173,7 +223,7 @@ class VKService {
             URLQueryItem(name: "client_id", value: String(appId)),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
-            URLQueryItem(name: "scope", value: "offline,friends,photos,groups"),
+            URLQueryItem(name: "scope", value: "offline,friends,photos,groups,messages,wall"),
             URLQueryItem(name: "response_type", value: "token"),
             URLQueryItem(name: "v", value: "5.68")
         ]
@@ -183,6 +233,85 @@ class VKService {
         return request
     }
     
+    func timeAgo(time: Double) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(time))
+     
+        
+        let unitFlags = Set<Calendar.Component>([.year, .month, .day, .hour, .minute, .second])
+        let components = Calendar.current.dateComponents(unitFlags, from: date, to: Date())
+        
+        
+        if components.year! % 100 > 10 && components.year! % 100 < 20 && components.year! > 0 {
+            return "\(String(components.year!)) лет назад"
+        }
+        if components.year! % 10 == 1  && components.year! > 0 {
+            return "\(String(components.year!)) год назад"
+        } else if components.year! % 10 > 1 && components.year! % 10 < 5 && components.year! > 0  {
+            return "\(String(components.year!)) год назад"
+        } else if  components.year! > 0  {
+            return "\(String(components.year!)) лет назад"
+        }
+        
+        
+        if components.month! % 100 > 10 && components.month! % 100 < 20 && components.month! > 0 {
+            return "\(String(components.month!)) месяцев назад"
+        }
+        if components.month! % 10 == 1 && components.month! > 0 {
+            return "\(String(components.month!)) месяц назад"
+        } else if components.month! % 10 > 1 && components.month! % 10 < 5 && components.month! > 0 {
+            return "\(String(components.month!)) месяца назад"
+        } else if components.day! > 0 {
+            return "\(String(components.month!)) месяцев назад"
+        }
+        
+        
+        if components.day! % 100 > 10 && components.day! % 100 < 20 && components.day! > 0 {
+            return "\(String(components.day!)) дней назад"
+        }
+        if components.day! % 10 == 1 && components.day! > 0 && components.day! > 0 {
+            return "\(String(components.day!)) день назад"
+        } else if components.day! % 10 > 1 && components.day! % 10 < 5 && components.day! > 0 {
+            return "\(String(components.day!)) дня назад"
+        } else if components.day! > 0 {
+            return "\(String(components.day!)) дней назад"
+        }
+        
+        
+        if components.hour! % 100 > 10 && components.hour! % 100 < 20 && components.hour! > 0 {
+            return "\(String(components.hour!)) часов назад"
+        }
+        if components.hour! % 10 == 1 && components.hour! > 0 {
+            return "\(String(components.hour!)) час назад"
+        } else if components.hour! % 10 > 1 && components.hour! % 10 < 5 && components.hour! > 0 {
+            return "\(String(components.hour!)) часа назад"
+        } else if components.hour! > 0 {
+            return "\(String(components.hour!)) часов назад"
+        }
+        
+        
+        if components.minute! % 100 > 10 && components.minute! % 100 < 20 && components.minute! > 0 {
+            return "\(String(components.minute!)) минут назад"
+        }
+        if components.minute! % 10 == 1 && components.minute! > 0  {
+            return "\(String(components.minute!)) минуту назад"
+        } else if components.minute! % 10 > 1 && components.minute! % 10 < 5 && components.minute! > 0  {
+            return "\(String(components.minute!)) минуты назад"
+        } else if components.minute! > 0 {
+            return "\(String(components.minute!)) минут назад"
+        }
+        
+        
+        if components.second! % 100 > 10 && components.second! % 100 < 20 && components.second! > 0 {
+            return "\(String(components.second!)) секунд назад"
+        }
+        if components.second! % 10 == 1 && components.second! > 0 {
+            return "\(String(components.second!)) секунду что"
+        } else if components.second! % 10 > 1 && components.second! % 10 < 5 && components.second! > 0  {
+            return "\(String(components.second!)) секунды назад"
+        } else {
+            return "\(String(components.second!)) секунд назад"
+        }
+    }
 }
 
 // метод для загрузки фото из интенета по URL
@@ -234,9 +363,8 @@ extension Realm {
     static func replaceDataInRealm<T: Object>(toNewObjects objects: [T]) {
         do {
             let realm = try Realm()
-            
-            
-            
+            print(realm.configuration.fileURL!)
+
             let oldObjects = realm.objects(T.self)
             
             try realm.write {
@@ -274,4 +402,3 @@ extension Realm {
         }
     }
 }
-

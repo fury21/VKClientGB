@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftKeychainWrapper
 import RealmSwift
 
 class MyGroupsController: UITableViewController {
@@ -37,7 +36,7 @@ class MyGroupsController: UITableViewController {
         guard let realm = try? Realm() else { return }
         getMyGroups = realm.objects(GetMyGroups.self)
         
-        notificationToken = getMyGroups?.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+        notificationToken = getMyGroups?.observe { [weak self] (changes: RealmCollectionChange) in
             guard let tableView = self?.tableView else { return }
             
             switch changes {
@@ -83,7 +82,7 @@ class MyGroupsController: UITableViewController {
         cell.myGroupImage?.setImageFromURL(stringImageUrl: groups.groupPhoto50)
         
         cell.myGroupImage.layer.masksToBounds = true
-        cell.myGroupImage.layer.cornerRadius = 25
+        cell.myGroupImage.layer.cornerRadius = cell.myGroupImage.frame.size.height / 2
         
         //        cell.myGroupImage.layer.borderColor = UIColor.black.cgColor
         //        cell.myGroupImage.layer.borderWidth = 0.5

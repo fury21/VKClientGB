@@ -71,7 +71,7 @@ extension WebViewController: WKNavigationDelegate {
         
         KeychainWrapper.standard.set(params["access_token"]!, forKey: "vkApiToken")
         userDefaults.set(params["user_id"]!, forKey: "vkApiUser_id")
-        
+        print(params["access_token"]!)
         decisionHandler(.cancel)
         
         performSegue(withIdentifier: "toLoginPage", sender: nil)
