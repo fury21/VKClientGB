@@ -64,7 +64,7 @@ class MyNewsfeedController: UITableViewController {
             let imgHeight = cell.newsFeedImage.image!.size.height
             let imgRatio = Int(imgWidth) / Int(imgHeight)
             
-            let maxScreenWidth = UIScreen.main.bounds.width - 10
+            let maxScreenWidth = UIScreen.main.bounds.width - 0 // граница по краям
 
             cell.newsFeedImageWidth.constant = maxScreenWidth
             cell.newsFeedImageHeight.constant = CGFloat(Int(maxScreenWidth) * Int(imgRatio))
@@ -73,7 +73,6 @@ class MyNewsfeedController: UITableViewController {
         } else {
             cell.newsFeedImageHeight.constant = 0
             cell.newsFeedImage.image = nil
-            
         }
         cell.titlePostOnlineStatus.text = vKService.timeAgo(time: newsFeed.titlePostTime)
         

@@ -37,7 +37,7 @@ class VKService {
             let json = JSON(data)
             
             let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) }
-            
+            print("ccc", friends)
             if !checkNewDataInRealm(jsonForGroups: nil, jsonForFriends: friends) { Realm.replaceDataInRealm(toNewObjects: friends) }
         }
     }

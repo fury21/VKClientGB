@@ -15,7 +15,7 @@ class GetMyFriends: Object {
     @objc dynamic var friendFullName = ""
     @objc dynamic var friendPhoto50 = ""
     @objc dynamic var frindsOnlineStatus = "offline"
-    
+
     convenience init(json: JSON) {
         self.init()
         id = json["id"].intValue

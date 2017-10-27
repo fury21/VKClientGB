@@ -4,11 +4,11 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Сообщения-->
+        <!--Table View Controller-->
         <scene sceneID="usV-tQ-Khl">
             <objects>
                 <tableViewController id="RVQ-Qf-Lbx" sceneMemberID="viewController">
@@ -31,7 +31,7 @@
                             <outlet property="delegate" destination="RVQ-Qf-Lbx" id="eq7-6O-nzX"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Сообщения" id="GGN-0V-Hfg"/>
+                    <tabBarItem key="tabBarItem" title="" image="messages_active_Normal" id="GGN-0V-Hfg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rvo-Ez-MCT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -39,4 +39,7 @@
             <point key="canvasLocation" x="82" y="116"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="messages_active_Normal" width="24" height="24"/>
+    </resources>
 </document>

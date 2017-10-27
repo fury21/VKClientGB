@@ -4,12 +4,12 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Настройки-->
+        <!--Settings View Controller-->
         <scene sceneID="eDR-eQ-ZxF">
             <objects>
                 <viewController id="Kb6-8L-tO9" customClass="SettingsViewController" customModule="_L_Бычковскии__А_В_" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,7 +33,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="c69-UO-2V0"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Настройки" id="zce-51-CJG"/>
+                    <tabBarItem key="tabBarItem" title="" image="settings_blue_24_Normal" id="otC-KZ-hJM"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="odT-mI-RxQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -48,4 +49,7 @@
             <point key="canvasLocation" x="1426" y="595"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="settings_blue_24_Normal" width="24" height="24"/>
+    </resources>
 </document>

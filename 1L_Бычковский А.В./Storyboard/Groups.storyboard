@@ -4,11 +4,11 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Группы-->
+        <!--Мои группы-->
         <scene sceneID="F9Q-Fa-KVV">
             <objects>
                 <tableViewController id="c7i-ek-uu1" customClass="MyGroupsController" customModule="_L_Бычковскии__А_В_" customModuleProvider="target" sceneMemberID="viewController">
@@ -63,9 +63,10 @@
                             <outlet property="delegate" destination="c7i-ek-uu1" id="QHc-3g-4Wv"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="" image="profile_friends_Normal" id="n0M-w1-R8F"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Группы" id="ZiN-YG-NwB">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="ixP-n3-ggL">
+                    <navigationItem key="navigationItem" title="Мои группы" id="ZiN-YG-NwB">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ixP-n3-ggL">
                             <connections>
                                 <segue destination="aqF-AK-ZF1" kind="show" id="gzi-aa-5Ot">
                                     <nil key="action"/>
@@ -73,6 +74,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oaf-sH-0tP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -154,15 +156,26 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jsw-qW-K9L">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.29019607843137252" green="0.4392156862745098" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kfv-1h-Vwf">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="c7i-ek-uu1" kind="relationship" relationship="rootViewController" id="X9d-dd-V3d"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IHC-ML-lRP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1567.5" y="36.971830985915496"/>
+            <point key="canvasLocation" x="1641" y="36"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="profile_friends_Normal" width="24" height="24"/>
+    </resources>
 </document>

@@ -81,7 +81,7 @@ class MyFriendsController: UITableViewController {
         
         cell.myFriendOnlineStatus.layer.masksToBounds = true
         cell.myFriendOnlineStatus.image = UIImage(named: friends.frindsOnlineStatus)
-        cell.myFriendOnlineStatus.layer.cornerRadius = cell.myFriendImage.frame.size.height / 2
+        cell.myFriendOnlineStatus.layer.cornerRadius = cell.myFriendOnlineStatus.frame.size.height / 2
         
         cell.myFriendImage.layer.masksToBounds = true
         cell.myFriendImage?.setImageFromURL(stringImageUrl: friends.friendPhoto50)
