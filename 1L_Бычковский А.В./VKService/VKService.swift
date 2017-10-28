@@ -24,7 +24,7 @@ class VKService {
         
         let parameters: Parameters = [
             "user_id": vKId,
-            "fields": "photo_50,online",
+            "fields": "photo_50,online,last_seen",
             "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
             "v": "5.68"
         ]
@@ -37,7 +37,8 @@ class VKService {
             let json = JSON(data)
             
             let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) }
-            print("ccc", friends)
+print("qqq", json)
+            print("www", friends)
             if !checkNewDataInRealm(jsonForGroups: nil, jsonForFriends: friends) { Realm.replaceDataInRealm(toNewObjects: friends) }
         }
     }
@@ -312,6 +313,15 @@ class VKService {
             return "\(String(components.second!)) секунд назад"
         }
     }
+    
+    
+    func photoResizer(imgWidth: CGFloat, imgHeight: CGFloat, maxScreenWidth: CGFloat) -> (newW: CGFloat, newH: CGFloat) {
+        let imgRatio = Double(imgWidth) / Double(maxScreenWidth)
+        
+        let newHight = CGFloat(Double(imgHeight) / Double(imgRatio))
+        
+        return (maxScreenWidth, newHight)
+    }
 }
 
 // метод для загрузки фото из интенета по URL
@@ -327,27 +337,33 @@ extension UIImageView {
 
 func checkNewDataInRealm(jsonForGroups: [GetMyGroups]?, jsonForFriends: [GetMyFriends]?) -> Bool {
     var setTrue = 0
+    
     do {
-        if jsonForFriends == nil || jsonForGroups != nil {
+        if jsonForFriends == nil && jsonForGroups != nil {
             let realm = try Realm()
             let objects = realm.objects(GetMyGroups.self)
             
             let set1 = Set(objects)
             let set2 = Set(jsonForGroups!)
             
-            if objects.count == jsonForGroups!.count || Set(set1.map{$0.id}).symmetricDifference(Set(set2.map{$0.id})) == [] {
+            if objects.count == jsonForGroups!.count && Set(set1.map{$0.id}).symmetricDifference(Set(set2.map{$0.id})) == [] {
                 setTrue = 1
             } else {
                 setTrue = 0
             }
-        } else if jsonForFriends != nil || jsonForGroups == nil {
+        } else if jsonForFriends != nil && jsonForGroups == nil {
             let realm = try Realm()
             let objects = realm.objects(GetMyFriends.self)
             
             let set1 = Set(objects)
             let set2 = Set(jsonForFriends!)
+            print("sss", objects)
+            print("ddd", jsonForFriends!)
+            print(Set(set1.map{$0.id}).symmetricDifference(Set(set2.map{$0.id})))
+            print(Set(set1.map{$0.frindsOnlineStatus}).symmetricDifference(Set(set2.map{$0.frindsOnlineStatus})))
+            print(Date())
             
-            if objects.count == jsonForFriends!.count || Set(set1.map{$0.id}).symmetricDifference(Set(set2.map{$0.id})) == [] {
+            if objects.count == jsonForFriends!.count && Set(set1.map{$0.id}).symmetricDifference(Set(set2.map{$0.id})) == [] && Set(set1.map{$0.frindsOnlineStatus}).symmetricDifference(Set(set2.map{$0.frindsOnlineStatus})) == [] {
                 setTrue = 1
             } else {
                 setTrue = 0
@@ -356,6 +372,7 @@ func checkNewDataInRealm(jsonForGroups: [GetMyGroups]?, jsonForFriends: [GetMyFr
     } catch {
         print(error)
     }
+    
     if setTrue == 1 { return true } else { return false }
 }
 

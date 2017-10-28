@@ -16,9 +16,14 @@ class MyFriendsController: UITableViewController {
     
     var notificationToken: NotificationToken?
     
+    @IBAction func refreshButtonFriends(_ sender: Any) {
+        vKService.loadVKAnyFriends(vKId: vKService.userVkId)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        
         pairTableAndRealm()
         
         vKService.loadVKAnyFriends(vKId: vKService.userVkId)
@@ -43,9 +48,9 @@ class MyFriendsController: UITableViewController {
                 tableView.reloadData()
             case .update(_, let deletions, let insertions, let modifications):
                 tableView.beginUpdates()
-                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .none)
+                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }), with: .none)
+                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .none)
                 tableView.endUpdates()
                 break
             case .error(let error):
@@ -80,8 +85,21 @@ class MyFriendsController: UITableViewController {
         cell.idFriend = friends.id
         
         cell.myFriendOnlineStatus.layer.masksToBounds = true
-        cell.myFriendOnlineStatus.image = UIImage(named: friends.frindsOnlineStatus)
-        cell.myFriendOnlineStatus.layer.cornerRadius = cell.myFriendOnlineStatus.frame.size.height / 2
+        
+        if friends.frindsOnlineStatus != "offline" {
+            if friends.frindsOnlineStatus == "online_mobile" {
+                cell.onlineStatusConstrainsWidth.constant = 8
+                cell.onlineStatusConstrainsHeight.constant = 12
+            } else {
+                cell.onlineStatusConstrainsWidth.constant = 8
+                cell.onlineStatusConstrainsHeight.constant = 8
+            }
+            cell.myFriendOnlineStatus.image = UIImage(named: friends.frindsOnlineStatus)
+        } else {
+            cell.onlineStatusConstrainsHeight.constant = 0
+            cell.myFriendOnlineStatus.image = nil
+        }
+        
         
         cell.myFriendImage.layer.masksToBounds = true
         cell.myFriendImage?.setImageFromURL(stringImageUrl: friends.friendPhoto50)
@@ -110,7 +128,7 @@ class MyFriendsController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "segueMyFrend" {
+        if segue.identifier == "segueMyFriend" {
             let cell = sender as! MyFriendsCell
             
             let selectedFriend = Array(getMyFriends!).filter({ $0.id == cell.idFriend })

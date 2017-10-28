@@ -58,7 +58,7 @@ class VKViewController: UICollectionViewController {
     
         cell.vk.text = fullName
         cell.friendImg.setImageFromURL(stringImageUrl: bigPhotoURL)
-
+        
         return cell
     }
 

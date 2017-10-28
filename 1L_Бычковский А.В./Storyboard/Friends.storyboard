@@ -26,39 +26,45 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dOq-ne-zyM">
                                             <rect key="frame" x="5" y="2" width="50" height="50"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="cUP-5Z-aSx"/>
                                                 <constraint firstAttribute="width" constant="50" id="cZ3-Vr-GuP"/>
                                             </constraints>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="offline" translatesAutoresizingMaskIntoConstraints="NO" id="HzN-qA-Lum">
-                                            <rect key="frame" x="396" y="23" width="8" height="8"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="8" id="1ML-gf-uXY"/>
-                                                <constraint firstAttribute="width" constant="8" id="zzj-rB-gEK"/>
-                                            </constraints>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z64-hV-XAE">
-                                            <rect key="frame" x="60" y="16" width="349" height="21"/>
+                                            <rect key="frame" x="60" y="16" width="331" height="21"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="online_pc" translatesAutoresizingMaskIntoConstraints="NO" id="HzN-qA-Lum">
+                                            <rect key="frame" x="396" y="22" width="8" height="8"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="8" id="H4H-yb-zRF"/>
+                                                <constraint firstAttribute="height" constant="8" id="Rf2-QN-Jrw"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="HzN-qA-Lum" firstAttribute="centerY" secondItem="WOJ-mG-f1s" secondAttribute="centerY" id="0d0-3A-fHD"/>
                                         <constraint firstItem="dOq-ne-zyM" firstAttribute="top" secondItem="WOJ-mG-f1s" secondAttribute="top" constant="2" id="5T8-97-OjD"/>
-                                        <constraint firstAttribute="trailing" secondItem="HzN-qA-Lum" secondAttribute="trailing" constant="10" id="Fkr-k9-NMj"/>
+                                        <constraint firstItem="HzN-qA-Lum" firstAttribute="leading" secondItem="z64-hV-XAE" secondAttribute="trailing" constant="5" id="5Xg-XS-Wgy"/>
+                                        <constraint firstItem="z64-hV-XAE" firstAttribute="leading" secondItem="dOq-ne-zyM" secondAttribute="trailing" constant="5" id="8aS-xG-rHp"/>
                                         <constraint firstItem="dOq-ne-zyM" firstAttribute="leading" secondItem="WOJ-mG-f1s" secondAttribute="leading" constant="5" id="G67-l6-XTT"/>
-                                        <constraint firstItem="HzN-qA-Lum" firstAttribute="centerY" secondItem="WOJ-mG-f1s" secondAttribute="centerY" id="Jku-Sb-ncX"/>
-                                        <constraint firstItem="z64-hV-XAE" firstAttribute="centerY" secondItem="WOJ-mG-f1s" secondAttribute="centerY" id="Mo8-Um-Bu6"/>
-                                        <constraint firstItem="z64-hV-XAE" firstAttribute="leading" secondItem="dOq-ne-zyM" secondAttribute="trailing" constant="5" id="YqS-5G-maS"/>
-                                        <constraint firstAttribute="trailing" secondItem="z64-hV-XAE" secondAttribute="trailing" constant="5" id="dcT-Ie-6d8"/>
+                                        <constraint firstItem="z64-hV-XAE" firstAttribute="centerY" secondItem="WOJ-mG-f1s" secondAttribute="centerY" id="RLM-1v-eaO"/>
+                                        <constraint firstAttribute="trailing" secondItem="HzN-qA-Lum" secondAttribute="trailing" constant="10" id="sJx-Zd-6GR"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="myFriendImage" destination="dOq-ne-zyM" id="ZNQ-wg-bb3"/>
                                     <outlet property="myFriendLabel" destination="z64-hV-XAE" id="eko-Wz-PW4"/>
                                     <outlet property="myFriendOnlineStatus" destination="HzN-qA-Lum" id="pwC-eJ-0pu"/>
+                                    <outlet property="onlineStatusConstrainsHeight" destination="Rf2-QN-Jrw" id="Mlf-Cl-YUf"/>
+                                    <outlet property="onlineStatusConstrainsWidth" destination="H4H-yb-zRF" id="2db-bv-w2f"/>
                                     <segue destination="5t3-Se-5e8" kind="show" identifier="segueMyFriend" id="2Vr-Ni-Ftj"/>
                                 </connections>
                             </tableViewCell>
@@ -69,12 +75,19 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="" image="user_blue_24_Normal" id="40R-UP-IG5"/>
-                    <navigationItem key="navigationItem" title="Мои друзья" id="JrU-0c-1ZX"/>
+                    <navigationItem key="navigationItem" title="Мои друзья" id="JrU-0c-1ZX">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="yxz-Mz-ll6">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="refreshButtonFriends:" destination="5Rk-9J-XWp" id="6hn-vW-foU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lQV-Fj-3hg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2348" y="-655"/>
+            <point key="canvasLocation" x="2347.826086956522" y="-655.43478260869574"/>
         </scene>
         <!--Добавить друзей-->
         <scene sceneID="hkC-kS-lRQ">
@@ -100,18 +113,22 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qxn-h9-wvx">
                                             <rect key="frame" x="5" y="119" width="140" height="21"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sap-NF-kfK">
                                             <rect key="frame" x="5" y="5" width="140" height="114"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="114" id="2Sb-cu-QgK"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                 </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="sap-NF-kfK" firstAttribute="leading" secondItem="nHo-cg-eVZ" secondAttribute="leading" constant="5" id="E3H-YT-X9z"/>
                                     <constraint firstItem="sap-NF-kfK" firstAttribute="top" secondItem="nHo-cg-eVZ" secondAttribute="top" constant="5" id="Vhx-AD-LOP"/>
@@ -146,10 +163,16 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pc6-RE-qcV">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.2901960784" green="0.43921568630000002" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.2901960784" green="0.43921568630000002" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textShadowColor" red="0.2901960784" green="0.43921568630000002" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -163,7 +186,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="offline" width="10" height="10"/>
+        <image name="online_pc" width="33" height="32"/>
         <image name="user_blue_24_Normal" width="24" height="24"/>
     </resources>
 </document>
