@@ -23,11 +23,14 @@ class MyFriendsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+     
         pairTableAndRealm()
+
+        DispatchQueue.global(qos: .userInteractive).async {
+
         
-        vKService.loadVKAnyFriends(vKId: vKService.userVkId)
-        
+            self.vKService.loadVKAnyFriends(vKId: self.vKService.userVkId)
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -102,7 +105,11 @@ class MyFriendsController: UITableViewController {
         
         
         cell.myFriendImage.layer.masksToBounds = true
-        cell.myFriendImage?.setImageFromURL(stringImageUrl: friends.friendPhoto50)
+        
+//        cell.myFriendImage?.setImageFromURL(stringImageUrl: friends.friendPhoto50)
+        
+            cell.myFriendImage.sd_setImage(with: URL(string: friends.friendPhoto50), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed]) //, completed: {(image, _, _, _) in })
+        
         cell.myFriendImage.layer.cornerRadius = cell.myFriendImage.frame.size.height / 2
         
         return cell

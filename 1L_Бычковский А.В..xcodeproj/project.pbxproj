@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		153223EDA3772CBCF53FE822 /* Pods_1L_________________.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30CA2B9570432FAE6FE9FBB1 /* Pods_1L_________________.framework */; };
 		380FE7BC1F76AA5B00529ECA /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FE7BB1F76AA5B00529ECA /* VKService.swift */; };
+		3818DD7A1FAFB4FA009DCBED /* MyMessagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818DD791FAFB4FA009DCBED /* MyMessagesCell.swift */; };
 		38569B071F8018A1001AD141 /* GetMyGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B061F8018A1001AD141 /* GetMyGroups.swift */; };
 		38569B0C1F8118AA001AD141 /* MyFriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0B1F8118AA001AD141 /* MyFriendsController.swift */; };
 		38569B0E1F811947001AD141 /* MyFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0D1F811947001AD141 /* MyFriendsCell.swift */; };
@@ -25,6 +26,8 @@
 		38A205BB1F951A910068B1DC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A205BA1F951A910068B1DC /* SettingsViewController.swift */; };
 		38B83F341F98FBD60078C741 /* GetMyNewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83F331F98FBD60078C741 /* GetMyNewsFeed.swift */; };
 		38B83F361F9904480078C741 /* GetMyFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B83F351F9904470078C741 /* GetMyFriends.swift */; };
+		38C8DF271FAB7F2B0082F1E0 /* GetMyMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C8DF261FAB7F2B0082F1E0 /* GetMyMessages.swift */; };
+		38C8DF291FAB8F2F0082F1E0 /* MyMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C8DF281FAB8F2F0082F1E0 /* MyMessagesController.swift */; };
 		38E3A1F41F6989B800F536F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E3A1F31F6989B800F536F8 /* AppDelegate.swift */; };
 		38E3A1FB1F6989B800F536F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38E3A1FA1F6989B800F536F8 /* Assets.xcassets */; };
 		38E3A1FE1F6989B800F536F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38E3A1FC1F6989B800F536F8 /* LaunchScreen.storyboard */; };
@@ -39,6 +42,7 @@
 /* Begin PBXFileReference section */
 		30CA2B9570432FAE6FE9FBB1 /* Pods_1L_________________.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_1L_________________.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		380FE7BB1F76AA5B00529ECA /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
+		3818DD791FAFB4FA009DCBED /* MyMessagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessagesCell.swift; sourceTree = "<group>"; };
 		38569B061F8018A1001AD141 /* GetMyGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyGroups.swift; sourceTree = "<group>"; };
 		38569B0B1F8118AA001AD141 /* MyFriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsController.swift; sourceTree = "<group>"; };
 		38569B0D1F811947001AD141 /* MyFriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsCell.swift; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 		38A205BA1F951A910068B1DC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		38B83F331F98FBD60078C741 /* GetMyNewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyNewsFeed.swift; sourceTree = "<group>"; };
 		38B83F351F9904470078C741 /* GetMyFriends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyFriends.swift; sourceTree = "<group>"; };
+		38C8DF261FAB7F2B0082F1E0 /* GetMyMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyMessages.swift; sourceTree = "<group>"; };
+		38C8DF281FAB8F2F0082F1E0 /* MyMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessagesController.swift; sourceTree = "<group>"; };
 		38E3A1F01F6989B800F536F8 /* 1L_Бычковский А.В..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "1L_Бычковский А.В..app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38E3A1F31F6989B800F536F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38E3A1FA1F6989B800F536F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -129,14 +135,24 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
-		3864DF6E1F96236700C4C8FB /* Newsfeed */ = {
+		3864DF6E1F96236700C4C8FB /* MyNewsfeed */ = {
 			isa = PBXGroup;
 			children = (
 				38985D731F98D10B004062EF /* MyNewsfeedController.swift */,
 				38985D751F98D143004062EF /* MyNewsFeedCell.swift */,
 				38B83F331F98FBD60078C741 /* GetMyNewsFeed.swift */,
 			);
-			path = Newsfeed;
+			path = MyNewsfeed;
+			sourceTree = "<group>";
+		};
+		38C8DF251FAB7EFA0082F1E0 /* MyMessages */ = {
+			isa = PBXGroup;
+			children = (
+				38C8DF281FAB8F2F0082F1E0 /* MyMessagesController.swift */,
+				3818DD791FAFB4FA009DCBED /* MyMessagesCell.swift */,
+				38C8DF261FAB7F2B0082F1E0 /* GetMyMessages.swift */,
+			);
+			path = MyMessages;
 			sourceTree = "<group>";
 		};
 		38E3A1E71F6989B800F536F8 = {
@@ -160,8 +176,9 @@
 		38E3A1F21F6989B800F536F8 /* 1L_Бычковский А.В. */ = {
 			isa = PBXGroup;
 			children = (
+				38C8DF251FAB7EFA0082F1E0 /* MyMessages */,
 				380FE7BA1F76AA2100529ECA /* VKService */,
-				3864DF6E1F96236700C4C8FB /* Newsfeed */,
+				3864DF6E1F96236700C4C8FB /* MyNewsfeed */,
 				38569B081F811854001AD141 /* MyFriendsController */,
 				38FE7F741F73D03F00EFDF92 /* VK */,
 				38FE7F6F1F7319EB00EFDF92 /* MyGroupsController */,
@@ -320,6 +337,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -328,6 +346,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -358,8 +377,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38C8DF271FAB7F2B0082F1E0 /* GetMyMessages.swift in Sources */,
 				38FE7F6C1F730A7900EFDF92 /* AllGroupsController.swift in Sources */,
 				38569B0C1F8118AA001AD141 /* MyFriendsController.swift in Sources */,
+				38C8DF291FAB8F2F0082F1E0 /* MyMessagesController.swift in Sources */,
 				38E3A2061F6994C200F536F8 /* LoginFormController.swift in Sources */,
 				38FE7F731F731A6E00EFDF92 /* MyGroupsController.swift in Sources */,
 				389CF0F81F74792700B8A4C9 /* MyGroupsCell.swift in Sources */,
@@ -372,6 +393,7 @@
 				380FE7BC1F76AA5B00529ECA /* VKService.swift in Sources */,
 				38B83F361F9904480078C741 /* GetMyFriends.swift in Sources */,
 				38FE7F6E1F730D3200EFDF92 /* AllGroupsCell.swift in Sources */,
+				3818DD7A1FAFB4FA009DCBED /* MyMessagesCell.swift in Sources */,
 				38FE7F781F73D0A600EFDF92 /* VKCell.swift in Sources */,
 				38E3A1F41F6989B800F536F8 /* AppDelegate.swift in Sources */,
 				386244341F8264700013E479 /* WebViewController.swift in Sources */,

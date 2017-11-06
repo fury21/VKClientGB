@@ -19,7 +19,8 @@ class AllGroupsController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tableView.contentOffset = CGPoint(x: 0, y: 22)
+        //self.tableView.setContentOffset(CGPoint(x: 0, y: searchBar.frame.size.height + (self.navigationController?.navigationBar.frame.size.height)!), animated: true)
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
         

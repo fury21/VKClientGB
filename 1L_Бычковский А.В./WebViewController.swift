@@ -56,7 +56,7 @@ extension WebViewController: WKNavigationDelegate {
                 decisionHandler(.allow)
                 return
         }
-        
+
         let params = fragment
             .components(separatedBy: "&")
             .map { $0.components(separatedBy: "=") }

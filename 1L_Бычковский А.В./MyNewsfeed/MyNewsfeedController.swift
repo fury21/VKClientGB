@@ -8,16 +8,38 @@
 
 import UIKit
 import RealmSwift
+import SDWebImage
 
 class MyNewsfeedController: UITableViewController {
     
     let vKService = VKService()
-    var getMyNewsFeed: Results<GetMyNewsFeed>?
+    var getMyNewsFeed: [GetMyNewsFeed]? //: Results<GetMyNewsFeed>?
     
     var notificationToken: NotificationToken?
     
+    let maxScreenWidth = UIScreen.main.bounds.width
+    
+    
+    func photoResizer(indexPathRow i: Int) -> (w: CGFloat, h: CGFloat) {
+        var photoSize = getMyNewsFeed![i].attachments_photoSize.components(separatedBy: "x")
+        
+        if Float(photoSize[0])! > Float(maxScreenWidth) {
+        
+        let imgRatio = Float(photoSize[0])! / Float(maxScreenWidth)
+        let newHeight = Float(photoSize[1])! / imgRatio
+            
+            return (maxScreenWidth, CGFloat(ceil(newHeight)))
+        } else {
+            return (CGFloat(Float(photoSize[0])!), CGFloat(Float(photoSize[1])!))
+        }
+    }
+    
     @IBAction func newsFeedRefreshButton(_ sender: Any) {
-        vKService.loadVKFeedNews()
+        //        vKService.loadVKFeedNews()
+        vKService.loadVKFeedNews() { [weak self] completion in
+            self?.getMyNewsFeed = completion
+            self?.tableView?.reloadData()
+        }
     }
     
     
@@ -26,9 +48,12 @@ class MyNewsfeedController: UITableViewController {
         //        self.tableView.estimatedRowHeight = 180 // примерная высота ячейки
         //        self.tableView.rowHeight = UITableViewAutomaticDimension
         
-        pairTableAndRealm()
+        //   pairTableAndRealm()
         
-        vKService.loadVKFeedNews()
+        vKService.loadVKFeedNews() { [weak self] completion in
+            self?.getMyNewsFeed = completion
+            self?.tableView?.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,23 +76,25 @@ class MyNewsfeedController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyNewsFeedCell", for: indexPath) as! MyNewsFeedCell
         
-        
         guard let newsFeed = getMyNewsFeed?[indexPath.row] else {
             cell.textLabel?.text = ""
+            
             return cell
         }
         
-        if newsFeed.attachments_typePhoto.lowercased().range(of: "http") != nil {
-            cell.newsFeedImage?.setImageFromURL(stringImageUrl: newsFeed.attachments_typePhoto)
+        
+        if !newsFeed.attachments_typePhoto.isEmpty {
+//            cell.newsFeedImage.setImageFromURL(stringImageUrl: newsFeed.attachments_typePhoto)
+
+            cell.newsFeedImage.sd_setImage(with: URL(string: newsFeed.attachments_typePhoto), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed]) //, completed: {(image, _, _, _) in })
             
-            let newImgSize = vKService.photoResizer(imgWidth: cell.newsFeedImage.image!.size.width, imgHeight: cell.newsFeedImage.image!.size.height, maxScreenWidth: UIScreen.main.bounds.width)
-            
-            cell.newsFeedImageWidth.constant = newImgSize.newW
-            cell.newsFeedImageHeight.constant = newImgSize.newH
+            cell.newsFeedImageWidth.constant = photoResizer(indexPathRow: indexPath.row).w
+            cell.newsFeedImageHeight.constant = photoResizer(indexPathRow: indexPath.row).h
         } else {
             cell.newsFeedImageHeight.constant = 0
             cell.newsFeedImage.image = nil
         }
+        
         
         cell.titlePostOnlineStatus.text = vKService.timeAgo(time: newsFeed.titlePostTime)
         
@@ -78,8 +105,10 @@ class MyNewsfeedController: UITableViewController {
             cell.newsFeedLabel.text = newsFeed.postText
         }
         
-        if newsFeed.titlePostPhoto.lowercased().range(of: "http") != nil {
-            cell.titlePostPhoto?.setImageFromURL(stringImageUrl: newsFeed.titlePostPhoto)
+        if !newsFeed.titlePostPhoto.isEmpty {
+//            cell.titlePostPhoto?.setImageFromURL(stringImageUrl: newsFeed.titlePostPhoto)
+            cell.titlePostPhoto.sd_setImage(with: URL(string: newsFeed.titlePostPhoto), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed], completed: {(image, _, _, _) in
+            })
         } else {
             cell.titlePostPhoto.image = nil
         }
@@ -89,7 +118,6 @@ class MyNewsfeedController: UITableViewController {
         cell.titlePostPhoto.layer.masksToBounds = true
         cell.titlePostPhoto.layer.cornerRadius = cell.titlePostPhoto.frame.size.height / 2
         
-        
         return cell
     }
     
@@ -97,29 +125,29 @@ class MyNewsfeedController: UITableViewController {
         
     }
     
-    func pairTableAndRealm() {
-        guard let realm = try? Realm() else { return }
-        getMyNewsFeed = realm.objects(GetMyNewsFeed.self)
-        
-        notificationToken = getMyNewsFeed?.observe { [weak self] (changes: RealmCollectionChange) in
-            guard let tableView = self?.tableView else { return }
-            
-            switch changes {
-            case .initial:
-                tableView.reloadData()
-            case .update(_, let deletions, let insertions, let modifications):
-                tableView.beginUpdates()
-                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                tableView.endUpdates()
-                break
-            case .error(let error):
-                fatalError("\(error)")
-                break
-            }
-        }
-    }
+    //    func pairTableAndRealm() {
+    //        guard let realm = try? Realm() else { return }
+    //        getMyNewsFeed = realm.objects(GetMyNewsFeed.self)
+    //
+    //        notificationToken = getMyNewsFeed?.observe { [weak self] (changes: RealmCollectionChange) in
+    //            guard let tableView = self?.tableView else { return }
+    //
+    //            switch changes {
+    //            case .initial:
+    //                tableView.reloadData()
+    //            case .update(_, let deletions, let insertions, let modifications):
+    //                tableView.beginUpdates()
+    //                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+    //                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+    //                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+    //                tableView.endUpdates()
+    //                break
+    //            case .error(let error):
+    //                fatalError("\(error)")
+    //                break
+    //            }
+    //        }
+    //    }
     
     /*
      // Override to support conditional editing of the table view.

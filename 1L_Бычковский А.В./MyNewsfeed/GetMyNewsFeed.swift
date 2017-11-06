@@ -21,7 +21,8 @@ class GetMyNewsFeed: Object {
     // сам пост
     @objc dynamic var postSource_id = 0 // с минусом группа, иначе пользователь
     @objc dynamic var postText = "" // текст к посту
-    @objc dynamic var attachments_typePhoto = "" // фото поста (вложение)
+    @objc dynamic var attachments_typePhoto: String = "" // фото поста (вложение)
+    @objc dynamic var attachments_photoSize = ""
     
     
     convenience init(jsonTitlePostPhotoAndLabelUser json: JSON) {
@@ -45,6 +46,9 @@ class GetMyNewsFeed: Object {
         postSource_id = json["source_id"].intValue
         postText = json["text"].stringValue
         attachments_typePhoto = json["attachments"][0]["photo"]["photo_604"].stringValue
+        if !json["attachments"][0]["photo"]["width"].stringValue.isEmpty {
+        attachments_photoSize = json["attachments"][0]["photo"]["width"].stringValue + "x" + json["attachments"][0]["photo"]["height"].stringValue
+        }
     }
     
 //    override static func primaryKey() -> String {

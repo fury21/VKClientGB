@@ -16,10 +16,9 @@ class MyNewsFeedCell: UITableViewCell {
     @IBOutlet weak var newsFeedImage: UIImageView!
     @IBOutlet weak var newsFeedLabel: UILabel!
     
-    @IBOutlet weak var newsFeedImageHeight: NSLayoutConstraint!
-    @IBOutlet weak var newsFeedImageWidth: NSLayoutConstraint!
     
-
+    @IBOutlet weak var newsFeedImageWidth: NSLayoutConstraint!
+    @IBOutlet weak var newsFeedImageHeight: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()

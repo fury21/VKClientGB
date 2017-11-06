@@ -37,7 +37,7 @@ class VKService {
             let json = JSON(data)
             
             let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) }
-print("qqq", json)
+            print("qqq", json)
             print("www", friends)
             if !checkNewDataInRealm(jsonForGroups: nil, jsonForFriends: friends) { Realm.replaceDataInRealm(toNewObjects: friends) }
         }
@@ -56,11 +56,11 @@ print("qqq", json)
         let url = baseUrl + path
         
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
-//            guard let data = response.value else { return }
-
-//            Пока входящий json не обрабатывается
-//            let json = JSON(data)
-//            let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) }
+            //            guard let data = response.value else { return }
+            
+            //            Пока входящий json не обрабатывается
+            //            let json = JSON(data)
+            //            let friends = json["response"]["items"].flatMap { GetMyFriends(json: $0.1) }
         }
     }
     
@@ -162,8 +162,8 @@ print("qqq", json)
             
         }
     }
-    
-    func loadVKFeedNews() {
+
+    func loadVKFeedNews(completion: @escaping ([GetMyNewsFeed]) -> Void) {
         let path = "/method/newsfeed.get"
         
         let parameters: Parameters = [
@@ -206,10 +206,35 @@ print("qqq", json)
                     }
                 }
             }
-            print("++++", newsFeed)
+            print("1++++", newsFeed)
+            completion(newsFeed)
+           
+//            if !checkNewDataInRealm(jsonForGroups: newsFeed, jsonForFriends: nil) { Realm.replaceDataInRealm(toNewObjects: newsFeed) }
+//              Realm.replaceDataInRealm(toNewObjects: newsFeed)
+        }
+    }
+    
+    func loadVKMessages() {
+        let path = "/method/messages.get"
+        
+        let parameters: Parameters = [
+            "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
+            "v": "5.68",
+            "count": "200"
+        ]
+        
+        let url = baseUrl + path
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
+            guard let data = response.value else { return }
             
-//            if !checkNewDataInRealm(jsonForGroups: nil, jsonForFriends: newsFeed) { Realm.replaceDataInRealm(toNewObjects: newsFeed) }
-            Realm.replaceDataInRealm(toNewObjects: newsFeed)
+            let json = JSON(data)
+            
+            let messages = json["response"]["items"].flatMap { GetMyMessages(json: $0.1) }
+            
+            Realm.replaceDataInRealm(toNewObjects: messages)
+            
+            print("+++", messages)
         }
     }
     
@@ -236,7 +261,7 @@ print("qqq", json)
     
     func timeAgo(time: Double) -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(time))
-     
+        
         
         let unitFlags = Set<Calendar.Component>([.year, .month, .day, .hour, .minute, .second])
         let components = Calendar.current.dateComponents(unitFlags, from: date, to: Date())
@@ -313,15 +338,6 @@ print("qqq", json)
             return "\(String(components.second!)) секунд назад"
         }
     }
-    
-    
-    func photoResizer(imgWidth: CGFloat, imgHeight: CGFloat, maxScreenWidth: CGFloat) -> (newW: CGFloat, newH: CGFloat) {
-        let imgRatio = Double(imgWidth) / Double(maxScreenWidth)
-        
-        let newHight = CGFloat(Double(imgHeight) / Double(imgRatio))
-        
-        return (maxScreenWidth, newHight)
-    }
 }
 
 // метод для загрузки фото из интенета по URL
@@ -381,7 +397,7 @@ extension Realm {
         do {
             let realm = try Realm()
             print(realm.configuration.fileURL!)
-
+            
             let oldObjects = realm.objects(T.self)
             
             try realm.write {

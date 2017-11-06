@@ -15,8 +15,6 @@ class GetMyFriends: Object {
     @objc dynamic var friendFullName = ""
     @objc dynamic var friendPhoto50 = ""
     @objc dynamic var frindsOnlineStatus = "offline"
-    //@objc dynamic var friendsDevice = ""
-    
 
     convenience init(json: JSON) {
         self.init()
