@@ -11,7 +11,14 @@ import UIKit
 
 class MyMessagesCell: UITableViewCell {
     
+    @IBOutlet weak var friendPhoto: UIImageView!
+    @IBOutlet weak var friendFullName: UILabel!
+    @IBOutlet weak var myLittlePhoto: UIImageView!
+    @IBOutlet weak var lastMessages: UILabel!
+    @IBOutlet weak var unreadStatus: UIView!
+    @IBOutlet weak var messageTime: UILabel!
     
+    @IBOutlet weak var bigImgConstrain: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()

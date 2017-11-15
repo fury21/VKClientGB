@@ -17,20 +17,16 @@ class MyFriendsController: UITableViewController {
     var notificationToken: NotificationToken?
     
     @IBAction func refreshButtonFriends(_ sender: Any) {
-        vKService.loadVKAnyFriends(vKId: vKService.userVkId)
+            vKService.loadVKAnyFriends(vKId: vKService.userVkId)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+    
         pairTableAndRealm()
-
-        DispatchQueue.global(qos: .userInteractive).async {
-
-        
-            self.vKService.loadVKAnyFriends(vKId: self.vKService.userVkId)
-        }
+    
+        vKService.loadVKAnyFriends(vKId: vKService.userVkId)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -106,9 +102,7 @@ class MyFriendsController: UITableViewController {
         
         cell.myFriendImage.layer.masksToBounds = true
         
-//        cell.myFriendImage?.setImageFromURL(stringImageUrl: friends.friendPhoto50)
-        
-            cell.myFriendImage.sd_setImage(with: URL(string: friends.friendPhoto50), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed]) //, completed: {(image, _, _, _) in })
+        cell.myFriendImage.sd_setImage(with: URL(string: friends.friendPhoto50), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed]) //, completed: {(image, _, _, _) in })
         
         cell.myFriendImage.layer.cornerRadius = cell.myFriendImage.frame.size.height / 2
         
@@ -127,8 +121,8 @@ class MyFriendsController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            vKService.deleteVKFromFriends(idFriendToDel: getMyFriends![indexPath.row].id)
+            // Delete the row from the data .vKService.deleteVKFromFriends(idFriendTo.getMyFriends![indexPath.row].id)
+            
             Realm.deleteDataFromRealm(objects: [getMyFriends![indexPath.row]])
         }
     }

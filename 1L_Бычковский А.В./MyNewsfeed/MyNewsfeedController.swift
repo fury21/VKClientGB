@@ -20,35 +20,40 @@ class MyNewsfeedController: UITableViewController {
     let maxScreenWidth = UIScreen.main.bounds.width
     
     
-    func photoResizer(indexPathRow i: Int) -> (w: CGFloat, h: CGFloat) {
-        var photoSize = getMyNewsFeed![i].attachments_photoSize.components(separatedBy: "x")
-        
-        if Float(photoSize[0])! > Float(maxScreenWidth) {
-        
-        let imgRatio = Float(photoSize[0])! / Float(maxScreenWidth)
-        let newHeight = Float(photoSize[1])! / imgRatio
-            
-            return (maxScreenWidth, CGFloat(ceil(newHeight)))
-        } else {
-            return (CGFloat(Float(photoSize[0])!), CGFloat(Float(photoSize[1])!))
-        }
-    }
+
     
     @IBAction func newsFeedRefreshButton(_ sender: Any) {
         //        vKService.loadVKFeedNews()
+        
         vKService.loadVKFeedNews() { [weak self] completion in
             self?.getMyNewsFeed = completion
             self?.tableView?.reloadData()
         }
     }
     
+
+    
+  
+    func photoResizer(indexPathRow i: Int) -> (w: CGFloat, h: CGFloat) {
+        var photoSize = getMyNewsFeed![i].attachments_photoSize.components(separatedBy: "x")
+        
+        if Float(photoSize[0])! > Float(maxScreenWidth) {
+            
+            let imgRatio = Float(photoSize[0])! / Float(maxScreenWidth)
+            let newHeight = Float(photoSize[1])! / imgRatio
+            
+            return (maxScreenWidth, CGFloat(ceil(newHeight)))
+        } else {
+            return (CGFloat(
+                Float(photoSize[0])!), CGFloat(Float(photoSize[1])!))
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        self.tableView.estimatedRowHeight = 180 // примерная высота ячейки
-        //        self.tableView.rowHeight = UITableViewAutomaticDimension
-        
         //   pairTableAndRealm()
+        
         
         vKService.loadVKFeedNews() { [weak self] completion in
             self?.getMyNewsFeed = completion
@@ -78,37 +83,39 @@ class MyNewsfeedController: UITableViewController {
         
         guard let newsFeed = getMyNewsFeed?[indexPath.row] else {
             cell.textLabel?.text = ""
-            
             return cell
         }
         
+        cell.delegateButton = self
+        cell.indexPathCell = indexPath
+        
         
         if !newsFeed.attachments_typePhoto.isEmpty {
-//            cell.newsFeedImage.setImageFromURL(stringImageUrl: newsFeed.attachments_typePhoto)
-
-            cell.newsFeedImage.sd_setImage(with: URL(string: newsFeed.attachments_typePhoto), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed]) //, completed: {(image, _, _, _) in })
+            cell.newsFeedImageWidth.constant = self.photoResizer(indexPathRow: indexPath.row).w
+            cell.newsFeedImageHeight.constant = self.photoResizer(indexPathRow: indexPath.row).h
             
-            cell.newsFeedImageWidth.constant = photoResizer(indexPathRow: indexPath.row).w
-            cell.newsFeedImageHeight.constant = photoResizer(indexPathRow: indexPath.row).h
+//            DispatchQueue.global(qos: .userInteractive).async {
+//            cell.newsFeedImage.setImageFromURL(stringImageUrl: newsFeed.attachments_typePhoto)
+//            }
+//
+           cell.newsFeedImage.sd_setImage(with: URL(string: newsFeed.attachments_typePhoto), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed]) //, completed: {(image, _, _, _) in })
         } else {
             cell.newsFeedImageHeight.constant = 0
-            cell.newsFeedImage.image = nil
+            //            cell.newsFeedImage.image = nil
         }
         
         
-        cell.titlePostOnlineStatus.text = vKService.timeAgo(time: newsFeed.titlePostTime)
+        cell.titlePostOnlineStatus.text = self.vKService.timeAgo(time: newsFeed.titlePostTime)
         
         
-        if newsFeed.postText == "" {
+        if newsFeed.postText.isEmpty {
             cell.newsFeedLabel.text = ""
         } else {
             cell.newsFeedLabel.text = newsFeed.postText
         }
         
         if !newsFeed.titlePostPhoto.isEmpty {
-//            cell.titlePostPhoto?.setImageFromURL(stringImageUrl: newsFeed.titlePostPhoto)
-            cell.titlePostPhoto.sd_setImage(with: URL(string: newsFeed.titlePostPhoto), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed], completed: {(image, _, _, _) in
-            })
+            cell.titlePostPhoto.sd_setImage(with: URL(string: newsFeed.titlePostPhoto), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed]) 
         } else {
             cell.titlePostPhoto.image = nil
         }
@@ -117,6 +124,31 @@ class MyNewsfeedController: UITableViewController {
         
         cell.titlePostPhoto.layer.masksToBounds = true
         cell.titlePostPhoto.layer.cornerRadius = cell.titlePostPhoto.frame.size.height / 2
+        
+        // лайки, комменты, шары, просмотры
+        
+        if newsFeed.userLikes == 1 {
+//        cell.likeIco.image = UIImage(named: "ic_liked_24dp_Normal")
+            cell.likeButtonOutlet.setImage(UIImage(named: "ic_liked_24dp_Normal"), for: .normal)
+            cell.likeLabel.textColor = UIColor(red: 254/255, green: 0/255, blue: 41/255, alpha: 1)
+        } else {
+//        cell.likeIco.image = UIImage(named: "ic_like_24dp_Normal")
+            cell.likeButtonOutlet.setImage(UIImage(named: "ic_like_24dp_Normal"), for: .normal) 
+            cell.likeLabel.textColor = UIColor(red: 102/255, green: 110/255, blue: 118/255, alpha: 1)
+        }
+        
+        cell.likeLabel.text = vKService.roundViews(count: newsFeed.likesCount)
+        
+        if newsFeed.commentCanPost == 1 {
+        cell.commentLabel.text = vKService.roundViews(count: newsFeed.commentsCount)
+        } else {
+            cell.commentIcoWidth.constant = 0
+            cell.commentLabelWidth.constant = 0
+            cell.commentLedingConstraint.constant = 0
+        }
+        cell.repostLabel.text = vKService.roundViews(count: newsFeed.repostsCount)
+        cell.viewersLabel.text = vKService.roundViews(count: newsFeed.viwesCount)
+        
         
         return cell
     }
@@ -194,3 +226,17 @@ class MyNewsfeedController: UITableViewController {
      }
      */
 }
+
+extension MyNewsfeedController: CellForButtonsDelegate {
+
+    func didTapCompleteButton(indexPath: IndexPath) {
+        if getMyNewsFeed![indexPath.row].userLikes == 0 {
+        vKService.addOrDeleteLike(likeType: .post, owner_id: getMyNewsFeed![indexPath.row].postSource_id, item_id: getMyNewsFeed![indexPath.row].post_id , action: .addLike)
+           
+            getMyNewsFeed![indexPath.row].userLikes = 1
+        } else {
+            vKService.addOrDeleteLike(likeType: .post, owner_id: getMyNewsFeed![indexPath.row].postSource_id, item_id: getMyNewsFeed![indexPath.row].post_id , action: .deleteLike)
+           
+            getMyNewsFeed![indexPath.row].userLikes = 0
+        }
+    }}

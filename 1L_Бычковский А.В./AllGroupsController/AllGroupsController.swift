@@ -19,8 +19,6 @@ class AllGroupsController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.contentOffset = CGPoint(x: 0, y: 22)
-        //self.tableView.setContentOffset(CGPoint(x: 0, y: searchBar.frame.size.height + (self.navigationController?.navigationBar.frame.size.height)!), animated: true)
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
         
@@ -48,24 +46,29 @@ class AllGroupsController: UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllGroupsCell", for: indexPath) as! AllGroupsCell
         
         cell.groupName.text = searchMyGroup[indexPath.row].groupName
-        cell.groupImg.setImageFromURL(stringImageUrl: searchMyGroup[indexPath.row].groupPhoto50)
+        
+        cell.groupImg.sd_setImage(with: URL(string: searchMyGroup[indexPath.row].groupPhoto50), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed])
+        
+        // округление фото
+        cell.groupImg.layer.masksToBounds = true
+        cell.groupImg.layer.cornerRadius = cell.groupImg.frame.size.height / 2
         
         return cell
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard searchBar.text != "" || searchBar.text != nil else {
+        guard !searchBar.text!.isEmpty else {
             searchMyGroup.removeAll()
             tableView.reloadData()
             return
         }
         
-        self.vKService.searchVKAnyGroups(q: searchBar.text!.lowercased())  { [weak self] searchMyGroup in
+        
+        vKService.searchVKAnyGroups(q: searchBar.text!.lowercased())  { [weak self] searchMyGroup in
             self?.searchMyGroup = searchMyGroup
             self?.tableView?.reloadData()
         }
     }
-    
     /*
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

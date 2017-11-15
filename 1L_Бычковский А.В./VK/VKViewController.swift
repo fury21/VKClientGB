@@ -57,8 +57,7 @@ class VKViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VKCell", for: indexPath) as! VKCell
     
         cell.vk.text = fullName
-        cell.friendImg.setImageFromURL(stringImageUrl: bigPhotoURL)
-        
+        cell.friendImg.sd_setImage(with: URL(string: bigPhotoURL), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed])
         return cell
     }
 

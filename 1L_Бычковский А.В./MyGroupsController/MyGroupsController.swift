@@ -17,15 +17,15 @@ class MyGroupsController: UITableViewController {
     var notificationToken: NotificationToken?
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pairTableAndRealm()
-        DispatchQueue.global(qos: .userInteractive).async {
+        tableView.contentOffset = CGPoint(x: 0, y: 44)
 
-            self.vKService.loadVKAnyGroups(vKId: self.vKService.userVkId)
-        }
+        pairTableAndRealm()
+        
+        vKService.loadVKAnyGroups(vKId: vKService.userVkId)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -80,16 +80,12 @@ class MyGroupsController: UITableViewController {
         
         cell.myGroupLabel.text = groups.groupName
         
-//        cell.myGroupImage?.setImageFromURL(stringImageUrl: groups.groupPhoto50)
-        cell.myGroupImage?.sd_setImage(with: URL(string: groups.groupPhoto50), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed])//, completed: {(image, _, _, _) in })
+        cell.myGroupImage?.sd_setImage(with: URL(string: groups.groupPhoto50), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed])
         
         cell.myGroupImage.layer.masksToBounds = true
         cell.myGroupImage.layer.cornerRadius = cell.myGroupImage.frame.size.height / 2
         
-        //        cell.myGroupImage.layer.borderColor = UIColor.black.cgColor
-        //        cell.myGroupImage.layer.borderWidth = 0.5
-        
-        
+
         return cell
     }
     

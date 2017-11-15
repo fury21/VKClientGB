@@ -41,17 +41,17 @@
                                             <rect key="frame" x="5" y="2" width="50" height="50"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="6bk-Wl-IW4"/>
-                                                <constraint firstAttribute="width" constant="50" id="l9F-96-WCg"/>
+                                                <constraint firstAttribute="width" constant="50" id="0IP-v6-XCx"/>
+                                                <constraint firstAttribute="height" constant="50" id="Kjv-Q7-lBh"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="DUX-kh-Kum" secondAttribute="trailing" constant="5" id="6U7-as-ImM"/>
-                                        <constraint firstItem="UeY-1V-hh1" firstAttribute="leading" secondItem="xDa-HW-M8n" secondAttribute="leading" constant="5" id="Mjv-kP-HOC"/>
-                                        <constraint firstItem="DUX-kh-Kum" firstAttribute="leading" secondItem="UeY-1V-hh1" secondAttribute="trailing" constant="5" id="YfT-2n-twh"/>
-                                        <constraint firstItem="UeY-1V-hh1" firstAttribute="top" secondItem="xDa-HW-M8n" secondAttribute="top" constant="2" id="dkg-9b-fJg"/>
-                                        <constraint firstItem="DUX-kh-Kum" firstAttribute="top" secondItem="xDa-HW-M8n" secondAttribute="top" constant="2" id="pmr-Kl-Bb4"/>
+                                        <constraint firstAttribute="trailing" secondItem="DUX-kh-Kum" secondAttribute="trailing" constant="5" id="GTW-XU-qSZ"/>
+                                        <constraint firstItem="UeY-1V-hh1" firstAttribute="leading" secondItem="xDa-HW-M8n" secondAttribute="leading" constant="5" id="bmG-Sq-oh6"/>
+                                        <constraint firstItem="DUX-kh-Kum" firstAttribute="top" secondItem="xDa-HW-M8n" secondAttribute="top" constant="2" id="cgy-R3-6Ui"/>
+                                        <constraint firstItem="DUX-kh-Kum" firstAttribute="leading" secondItem="UeY-1V-hh1" secondAttribute="trailing" constant="5" id="fyb-L4-fWU"/>
+                                        <constraint firstItem="UeY-1V-hh1" firstAttribute="top" secondItem="xDa-HW-M8n" secondAttribute="top" constant="2" id="yTb-eQ-i9q"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -86,7 +86,7 @@
         <scene sceneID="orF-W3-fiR">
             <objects>
                 <tableViewController title="Поиск групп" id="aqF-AK-ZF1" customClass="AllGroupsController" customModule="_L_Бычковскии__А_В_" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZCc-CU-UIn">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="54" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZCc-CU-UIn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -97,35 +97,32 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AllGroupsCell" id="hvk-va-yPA" customClass="AllGroupsCell" customModule="_L_Бычковскии__А_В_" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hvk-va-yPA" id="cuR-Ro-PB0">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="53.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IQM-op-TME">
-                                            <rect key="frame" x="0.0" y="0.5" width="50" height="50"/>
+                                            <rect key="frame" x="5" y="2" width="50" height="50"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="OvV-55-hdz"/>
-                                                <constraint firstAttribute="width" constant="50" id="fGn-mg-BSK"/>
+                                                <constraint firstAttribute="width" constant="50" id="CVu-fU-3pz"/>
+                                                <constraint firstAttribute="height" constant="50" id="zsp-bW-qyg"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3aC-vh-eIY">
-                                            <rect key="frame" x="55" y="0.5" width="320" height="20.5"/>
+                                            <rect key="frame" x="60" y="2" width="310" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="3aC-vh-eIY" secondAttribute="bottom" id="1BL-zp-Bjo"/>
-                                        <constraint firstItem="IQM-op-TME" firstAttribute="centerY" secondItem="cuR-Ro-PB0" secondAttribute="centerY" id="2Gs-UY-vzW"/>
-                                        <constraint firstItem="IQM-op-TME" firstAttribute="leading" secondItem="cuR-Ro-PB0" secondAttribute="leading" id="8JL-ck-DFN"/>
-                                        <constraint firstItem="3aC-vh-eIY" firstAttribute="leading" secondItem="IQM-op-TME" secondAttribute="trailing" constant="5" id="Ecq-Nd-05F"/>
-                                        <constraint firstAttribute="trailing" secondItem="3aC-vh-eIY" secondAttribute="trailing" id="IHL-l7-C4H"/>
-                                        <constraint firstItem="3aC-vh-eIY" firstAttribute="top" secondItem="cuR-Ro-PB0" secondAttribute="top" id="e57-JW-Mej"/>
-                                        <constraint firstItem="IQM-op-TME" firstAttribute="top" secondItem="cuR-Ro-PB0" secondAttribute="top" id="nHe-sr-Zf0"/>
-                                        <constraint firstAttribute="bottom" secondItem="IQM-op-TME" secondAttribute="bottom" id="sVO-hr-uVK"/>
+                                        <constraint firstItem="3aC-vh-eIY" firstAttribute="leading" secondItem="IQM-op-TME" secondAttribute="trailing" constant="5" id="1If-NG-FNg"/>
+                                        <constraint firstItem="IQM-op-TME" firstAttribute="top" secondItem="cuR-Ro-PB0" secondAttribute="top" constant="2" id="JCP-e9-LLS"/>
+                                        <constraint firstAttribute="trailing" secondItem="3aC-vh-eIY" secondAttribute="trailing" constant="5" id="d4B-DR-Z8f"/>
+                                        <constraint firstItem="IQM-op-TME" firstAttribute="leading" secondItem="cuR-Ro-PB0" secondAttribute="leading" constant="5" id="m2Y-2l-iHg"/>
+                                        <constraint firstItem="3aC-vh-eIY" firstAttribute="top" secondItem="cuR-Ro-PB0" secondAttribute="top" constant="2" id="mdp-Mt-c2G"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
