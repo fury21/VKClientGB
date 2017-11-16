@@ -10,6 +10,8 @@
 		153223EDA3772CBCF53FE822 /* Pods_1L_________________.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30CA2B9570432FAE6FE9FBB1 /* Pods_1L_________________.framework */; };
 		380FE7BC1F76AA5B00529ECA /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380FE7BB1F76AA5B00529ECA /* VKService.swift */; };
 		3818DD7A1FAFB4FA009DCBED /* MyMessagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3818DD791FAFB4FA009DCBED /* MyMessagesCell.swift */; };
+		383C5C961FBDE50F00F0E60E /* NewPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C5C951FBDE50F00F0E60E /* NewPostController.swift */; };
+		383C5C981FBDEA1700F0E60E /* AddGeoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C5C971FBDEA1700F0E60E /* AddGeoController.swift */; };
 		38569B071F8018A1001AD141 /* GetMyGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B061F8018A1001AD141 /* GetMyGroups.swift */; };
 		38569B0C1F8118AA001AD141 /* MyFriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0B1F8118AA001AD141 /* MyFriendsController.swift */; };
 		38569B0E1F811947001AD141 /* MyFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0D1F811947001AD141 /* MyFriendsCell.swift */; };
@@ -43,6 +45,8 @@
 		30CA2B9570432FAE6FE9FBB1 /* Pods_1L_________________.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_1L_________________.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		380FE7BB1F76AA5B00529ECA /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
 		3818DD791FAFB4FA009DCBED /* MyMessagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessagesCell.swift; sourceTree = "<group>"; };
+		383C5C951FBDE50F00F0E60E /* NewPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostController.swift; sourceTree = "<group>"; };
+		383C5C971FBDEA1700F0E60E /* AddGeoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGeoController.swift; sourceTree = "<group>"; };
 		38569B061F8018A1001AD141 /* GetMyGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyGroups.swift; sourceTree = "<group>"; };
 		38569B0B1F8118AA001AD141 /* MyFriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsController.swift; sourceTree = "<group>"; };
 		38569B0D1F811947001AD141 /* MyFriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsCell.swift; sourceTree = "<group>"; };
@@ -112,6 +116,15 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		383C5C921FBDD7E500F0E60E /* NewPost */ = {
+			isa = PBXGroup;
+			children = (
+				383C5C951FBDE50F00F0E60E /* NewPostController.swift */,
+				383C5C971FBDEA1700F0E60E /* AddGeoController.swift */,
+			);
+			path = NewPost;
+			sourceTree = "<group>";
+		};
 		38569B081F811854001AD141 /* MyFriendsController */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +189,7 @@
 		38E3A1F21F6989B800F536F8 /* 1L_Бычковский А.В. */ = {
 			isa = PBXGroup;
 			children = (
+				383C5C921FBDD7E500F0E60E /* NewPost */,
 				380FE7BA1F76AA2100529ECA /* VKService */,
 				3864DF6E1F96236700C4C8FB /* MyNewsfeed */,
 				38C8DF251FAB7EFA0082F1E0 /* MyMessages */,
@@ -377,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				383C5C981FBDEA1700F0E60E /* AddGeoController.swift in Sources */,
 				38C8DF271FAB7F2B0082F1E0 /* GetMyMessages.swift in Sources */,
 				38FE7F6C1F730A7900EFDF92 /* AllGroupsController.swift in Sources */,
 				38569B0C1F8118AA001AD141 /* MyFriendsController.swift in Sources */,
@@ -387,6 +402,7 @@
 				38569B071F8018A1001AD141 /* GetMyGroups.swift in Sources */,
 				38985D741F98D10B004062EF /* MyNewsfeedController.swift in Sources */,
 				38FE7F761F73D06300EFDF92 /* VKViewController.swift in Sources */,
+				383C5C961FBDE50F00F0E60E /* NewPostController.swift in Sources */,
 				38B83F341F98FBD60078C741 /* GetMyNewsFeed.swift in Sources */,
 				38985D761F98D143004062EF /* MyNewsFeedCell.swift in Sources */,
 				38569B0E1F811947001AD141 /* MyFriendsCell.swift in Sources */,

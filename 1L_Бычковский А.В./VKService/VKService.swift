@@ -296,6 +296,31 @@ class VKService {
         }
     }
     
+    func newVkPost(message: String, coord: (Double, Double)?) {
+        let path = "/method/wall.post"
+        
+        var parameters: Parameters = [
+            "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
+            "v": "5.68",
+            "message": message
+        ]
+        
+        if coord != nil {
+            parameters["lat"] = coord!.0
+            parameters["long"] = coord!.1
+        }
+        
+        
+        let url = baseUrl + path
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON(queue: .global(qos: .userInteractive)) { response in
+//            guard let data = response.value else { return }
+//            let json = JSON(data)
+//            let messages = json["response"]["items"].flatMap { GetMyMessages(json: $0.1) }
+//            Realm.replaceDataInRealm(toNewObjects: messages)
+        }
+    }
+    
     enum likeAction: String {
         case addLike = "/method/likes.add"
         case deleteLike = "/method/likes.delete"

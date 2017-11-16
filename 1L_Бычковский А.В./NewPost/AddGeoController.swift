@@ -1,0 +1,85 @@
+//
+//  AddGeoController.swift
+//  1L_Бычковский А.В.
+//
+//  Created by Александр Б. on 16.11.2017.
+//  Copyright © 2017 Александр Б. All rights reserved.
+//
+
+import UIKit
+import MapKit
+import CoreLocation
+
+class AddGeoController: UIViewController, CLLocationManagerDelegate {
+
+    let locationManager = CLLocationManager()
+    
+    var coordinateMapVC: (Double, Double) = (0, 0)
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
+    
+    @IBAction func closeMap(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let currentLocation = locations.last?.coordinate {
+            print(currentLocation)
+            
+            coordinateMapVC = (currentLocation.latitude, currentLocation.longitude)
+            
+            let coordinate = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
+            let coder = CLGeocoder()
+            coder.reverseGeocodeLocation(coordinate) {(myPlaces,Error) -> Void in
+                if let place = myPlaces?.first {
+                    print(place.locality!)
+                }
+            }
+            let currentRadius: CLLocationDistance = 500
+            let currentRegion = MKCoordinateRegionMakeWithDistance((currentLocation), currentRadius * 2.0, currentRadius * 2.0)
+            self.mapView.setRegion(currentRegion, animated: true)
+            self.mapView.showsUserLocation = true
+        
+        }
+    }
+
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addGeoToPost" {
+            let temp = segue.destination as! NewPostController
+            temp.coordinateNews = coordinateMapVC
+        }
+    }
+    
+
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

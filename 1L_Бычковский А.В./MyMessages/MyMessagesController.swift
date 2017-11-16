@@ -69,6 +69,34 @@ class MyMessagesController: UITableViewController {
         
         cell.myLittlePhoto.sd_setImage(with: URL(string: messages.currentUserMiniPhoto), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed])
         
+//        func dateFormatter(date: Int) {
+//
+//            let date = Date(timeIntervalSince1970: TimeInterval(date))
+//            let dateNow = Date(timeIntervalSince1970: TimeInterval(Date()))
+//
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "MM-dd-yyyy hh:mm:ss"
+//            let dateString = dateFormatter.string(from: date)
+//
+//
+//
+//            print("Custom date format Sample 1 =  \(dateString)")
+//
+//            let startDate = "1510727402"
+//            let endDate = "1510727412"
+//
+//            let cal = Calendar.current
+//            let components = cal.components(.second , fromDate: startDate, toDate: endDate, options: nil)
+//            let components = cal.dateComponents(<#T##components: Set<Calendar.Component>##Set<Calendar.Component>#>, from: <#T##Date#>, to: <#T##Date#>)
+//            print("GGG", components)
+//
+//        }
+        
+     
+//        dateFormatter(date: messages.date)
+//        cell.messageTime.text = messages.date
+        
+        
         
         cell.lastMessages.text = messages.body
 

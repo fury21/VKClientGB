@@ -157,6 +157,9 @@ class MyNewsfeedController: UITableViewController {
         
     }
     
+    @IBAction func cancelAddNewPost(unwindSegue: UIStoryboardSegue) {}
+    
+    
     //    func pairTableAndRealm() {
     //        guard let realm = try? Realm() else { return }
     //        getMyNewsFeed = realm.objects(GetMyNewsFeed.self)

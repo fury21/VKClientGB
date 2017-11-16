@@ -55,12 +55,15 @@ class MyNewsFeedCell: UITableViewCell {
             likeButtonOutlet.setImage(UIImage(named: "ic_liked_24dp_Normal"), for: .normal)
             likeLabel.textColor = UIColor(red: 254/255, green: 0/255, blue: 41/255, alpha: 1)
             
-            if Int(likeLabel.text!)! < 1000 { likeLabel.text = String(Int(likeLabel.text!)! + 1) }
+            if let likesTest = Int(likeLabel.text!) {
+             if likesTest < 1000 { likeLabel.text = String(Int(likeLabel.text!)! + 1) }
+            }
         } else {
             likeButtonOutlet.setImage(UIImage(named: "ic_like_24dp_Normal"), for: .normal)
             likeLabel.textColor = UIColor(red: 102/255, green: 110/255, blue: 118/255, alpha: 1)
-            
-            if Int(likeLabel.text!)! < 1000 { likeLabel.text = String(Int(likeLabel.text!)! - 1) }
+            if let likesTest = Int(likeLabel.text!) {
+                if likesTest < 1000 { likeLabel.text = String(Int(likeLabel.text!)! - 1) }
+            }
         }
     }
 

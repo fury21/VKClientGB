@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,6 +17,7 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.2901960784" green="0.43921568630000002" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.2901960784" green="0.43921568630000002" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -238,10 +240,16 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="" image="newsfeed_active_Normal" id="D1H-Wr-uRw"/>
                     <navigationItem key="navigationItem" title="Мои новости" id="da0-7o-r7W">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="eeb-ae-JqI">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="eeb-ae-JqI">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="newsFeedRefreshButton:" destination="bMt-Bh-LGn" id="yNH-fs-yhp"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="uzr-sz-7ET">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="gN0-U1-7UB" kind="show" id="Fgz-vR-IOd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -250,6 +258,114 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vv6-yk-0Yr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="176.80000000000001" y="-170.46476761619192"/>
+        </scene>
+        <!--Новая запись-->
+        <scene sceneID="hHz-uN-kZH">
+            <objects>
+                <viewController id="gN0-U1-7UB" customClass="NewPostController" customModule="_L_Бычковскии__А_В_" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hyy-Yh-4jF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZo-FB-foU">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="WNy-ui-Cea"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" id="Y4t-f9-bW3">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h18-WK-Hgz">
+                                            <rect key="frame" x="16" y="7" width="343" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Добавить координаты"/>
+                                            <connections>
+                                                <segue destination="Q7B-k1-F4e" kind="show" identifier="" id="wWS-vX-rBH"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Что у Вас нового?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="22S-YC-Xgb">
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bZo-FB-foU" firstAttribute="trailing" secondItem="xin-TK-Fpt" secondAttribute="trailing" id="EP3-VP-gZc"/>
+                            <constraint firstItem="bZo-FB-foU" firstAttribute="top" secondItem="xin-TK-Fpt" secondAttribute="top" id="VEV-sj-vWd"/>
+                            <constraint firstItem="xin-TK-Fpt" firstAttribute="bottom" secondItem="22S-YC-Xgb" secondAttribute="bottom" id="bGQ-mS-STq"/>
+                            <constraint firstItem="22S-YC-Xgb" firstAttribute="leading" secondItem="xin-TK-Fpt" secondAttribute="leading" id="cQm-kO-Tgr"/>
+                            <constraint firstItem="xin-TK-Fpt" firstAttribute="trailing" secondItem="22S-YC-Xgb" secondAttribute="trailing" id="mL0-yH-IBy"/>
+                            <constraint firstItem="22S-YC-Xgb" firstAttribute="top" secondItem="bZo-FB-foU" secondAttribute="bottom" id="p4L-b2-evc"/>
+                            <constraint firstItem="bZo-FB-foU" firstAttribute="leading" secondItem="xin-TK-Fpt" secondAttribute="leading" id="z94-jo-122"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xin-TK-Fpt"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Новая запись" id="hgI-aC-4tV">
+                        <barButtonItem key="rightBarButtonItem" id="ADV-yG-U39">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wUr-97-WJ9">
+                                <rect key="frame" x="311" y="7" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Готово"/>
+                                <connections>
+                                    <action selector="postButton:" destination="gN0-U1-7UB" eventType="touchUpInside" id="xC4-9o-H2A"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="postText" destination="22S-YC-Xgb" id="h2b-bN-4B7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KzG-g7-6UY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="937" y="-170"/>
+        </scene>
+        <!--Add Geo Controller-->
+        <scene sceneID="KLA-7d-zey">
+            <objects>
+                <viewController id="Q7B-k1-F4e" customClass="AddGeoController" customModule="_L_Бычковскии__А_В_" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EWa-7u-RXw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TRc-dk-e2B">
+                                <rect key="frame" x="0.0" y="110" width="375" height="374"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDn-Vh-xoJ">
+                                <rect key="frame" x="279" y="79" width="67" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Готово"/>
+                                <connections>
+                                    <segue destination="8Ch-CU-QAG" kind="unwind" identifier="addGeoToPost" unwindAction="cancelAddNGeoWithUnwindSegue:" id="BJI-Nh-EdF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fkp-D5-7TW">
+                                <rect key="frame" x="29" y="72" width="98" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Отмена"/>
+                                <connections>
+                                    <action selector="closeMap:" destination="Q7B-k1-F4e" eventType="touchUpInside" id="GV5-fv-VC4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="29K-we-Hzx"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="TRc-dk-e2B" id="pJL-1G-9vF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NN8-oe-fti" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8Ch-CU-QAG" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="937" y="620"/>
         </scene>
     </scenes>
     <resources>
