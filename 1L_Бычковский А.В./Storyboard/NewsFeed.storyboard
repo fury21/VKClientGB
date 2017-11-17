@@ -268,7 +268,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZo-FB-foU">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="WNy-ui-Cea"/>
                                 </constraints>
@@ -286,7 +286,7 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Что у Вас нового?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="22S-YC-Xgb">
-                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -312,6 +312,7 @@
                                 <state key="normal" title="Готово"/>
                                 <connections>
                                     <action selector="postButton:" destination="gN0-U1-7UB" eventType="touchUpInside" id="xC4-9o-H2A"/>
+                                    <segue destination="bMt-Bh-LGn" kind="presentation" id="FzS-Vx-V4d"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -375,4 +376,7 @@
         <image name="ic_viewers_24dp_Normal" width="20" height="20"/>
         <image name="newsfeed_active_Normal" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="FzS-Vx-V4d"/>
+    </inferredMetricsTieBreakers>
 </document>

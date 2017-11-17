@@ -105,7 +105,7 @@ class MyNewsfeedController: UITableViewController {
         }
         
         
-        cell.titlePostOnlineStatus.text = self.vKService.timeAgo(time: newsFeed.titlePostTime)
+        cell.titlePostOnlineStatus.text = vKService.timeAgo(time: newsFeed.titlePostTime)
         
         
         if newsFeed.postText.isEmpty {

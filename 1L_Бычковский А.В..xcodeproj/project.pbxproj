@@ -189,8 +189,8 @@
 		38E3A1F21F6989B800F536F8 /* 1L_Бычковский А.В. */ = {
 			isa = PBXGroup;
 			children = (
-				383C5C921FBDD7E500F0E60E /* NewPost */,
 				380FE7BA1F76AA2100529ECA /* VKService */,
+				383C5C921FBDD7E500F0E60E /* NewPost */,
 				3864DF6E1F96236700C4C8FB /* MyNewsfeed */,
 				38C8DF251FAB7EFA0082F1E0 /* MyMessages */,
 				38569B081F811854001AD141 /* MyFriendsController */,

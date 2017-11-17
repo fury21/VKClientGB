@@ -265,7 +265,7 @@ class VKService {
             
             Realm.replaceDataInRealm(toNewObjects: dialogs)
             
-            //            print("m+", dialogs)
+            //print("m+", dialogs)
             //print("m++", dialogs1)
             //print("m+++", dialogs2)
             
@@ -296,7 +296,7 @@ class VKService {
         }
     }
     
-    func newVkPost(message: String, coord: (Double, Double)?) {
+    func newVkPost(message: String, geo: (Double, Double)?) {
         let path = "/method/wall.post"
         
         var parameters: Parameters = [
@@ -305,9 +305,9 @@ class VKService {
             "message": message
         ]
         
-        if coord != nil {
-            parameters["lat"] = coord!.0
-            parameters["long"] = coord!.1
+        if geo != nil {
+            parameters["lat"] = geo!.0
+            parameters["long"] = geo!.1
         }
         
         
@@ -452,6 +452,34 @@ class VKService {
             return "\(String(components.second!)) секунд назад"
         }
     }
+    
+    func vkMessagesDateFormatter(messageDate: Int) -> String {
+        let messageDate = Date(timeIntervalSince1970: TimeInterval(messageDate))
+        let dateNow = Date()
+        let calendar = Calendar.current
+
+        let dateFormatter = DateFormatter()
+         dateFormatter.locale = Locale(identifier: "ru")
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+        let todayMinus7Month = (calendar.date(byAdding: .month, value: -7, to: dateNow))
+        let todayMinus2Days = (calendar.date(byAdding: .day, value: -2, to: dateNow))
+        
+
+        if calendar.isDateInToday(messageDate) {
+            dateFormatter.dateFormat = "HH:mm"
+            return dateFormatter.string(from: messageDate)
+        } else if calendar.isDateInYesterday(messageDate) {
+            return "вчера"
+        } else if Double(messageDate.timeIntervalSince1970) >= Double((todayMinus7Month?.timeIntervalSince1970)!) && Double((messageDate.timeIntervalSince1970)) <= Double((todayMinus2Days?.timeIntervalSince1970)!) {
+            dateFormatter.dateFormat = "dd MMM"
+            return dateFormatter.string(from: messageDate)
+        } else {
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            return dateFormatter.string(from: messageDate)
+        }
+    }
+
     
     func roundViews (count: Int) -> String {
         switch count {

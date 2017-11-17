@@ -22,7 +22,7 @@ class NewPostController: UIViewController {
     @IBAction func postButton(_ sender: Any) {
         
 //        print(coordinateNews.0, coordinateNews.1)
-        vKService.newVkPost(message: postText.text!, coord: coordinateNews)
+        vKService.newVkPost(message: postText.text!, geo: coordinateNews)
         
         //dismiss(animated: true, completion: nil)
         
