@@ -15,7 +15,7 @@ class VKService {
     // параметры API ВКонтакте
     let baseUrl = "https://api.vk.com"
     let userVkId = userDefaults.integer(forKey: "vkApiUser_id") // id страницы авторизованного пользователя
-    let appId = 6232209 // id приложения в ВК
+    let appId = 6266627 // id приложения в ВК
     
     
     // список друзей по id
@@ -227,7 +227,7 @@ class VKService {
         let parameters: Parameters = [
             "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
             "v": "5.68",
-            "code": "var allDialogs = API.messages.getDialogs({\"count\":200, \"v\":5.68});var allDialogsUsersId = allDialogs.items@.message@.user_id;var currentUserData = API.users.get({\"fields\":\"photo_50\", \"v\":5.68, \"user_ids\":\(userVkId)});var friendsArray =[];var groupsArray = [];var i = 0;while (i < allDialogsUsersId.length) {if (allDialogsUsersId[i] > 0) {friendsArray.push(allDialogsUsersId[i]);} else {groupsArray.push(allDialogsUsersId[i] * -1);}i = i + 1;}var friends = API.users.get({\"fields\":\"photo_50\", \"v\":5.68, \"user_ids\":friendsArray});var groups = API.groups.getById({\"group_ids\": groupsArray, \"v\":\"5.68\"});return {\"allDialogs\": allDialogs, \"friendsData\": friends, \"groupsData\":groups, \"currentUserData\": currentUserData};"
+            "code": "var allDialogs = API.messages.getDialogs({\"count\":200, \"v\":5.68, \"offset\":0});var allDialogsUsersId = allDialogs.items@.message@.user_id;var currentUserData = API.users.get({\"fields\":\"photo_50\", \"v\":5.68, \"user_ids\":\(userVkId)});var friendsArray =[];var groupsArray = [];var i = 0;while (i < allDialogsUsersId.length) {if (allDialogsUsersId[i] > 0) {friendsArray.push(allDialogsUsersId[i]);} else {groupsArray.push(allDialogsUsersId[i] * -1);}i = i + 1;}var friends = API.users.get({\"fields\":\"photo_50\", \"v\":5.68, \"user_ids\":friendsArray});var groups = API.groups.getById({\"group_ids\": groupsArray, \"v\":\"5.68\"});return {\"allDialogs\": allDialogs, \"friendsData\": friends, \"groupsData\":groups, \"currentUserData\": currentUserData};"
         ]
         
         let url = baseUrl + path
@@ -265,12 +265,109 @@ class VKService {
             
             Realm.replaceDataInRealm(toNewObjects: dialogs)
             
-            //print("m+", dialogs)
+//            print("m+", dialogs)
             //print("m++", dialogs1)
             //print("m+++", dialogs2)
             
         }
     }
+    
+    
+    
+    
+    
+    // 1 запросить сервер для закачки
+    // 2 на сервер фото
+    // 3 вызвать saveWallPhotoToVkServer
+    
+    
+    func getWallUploadServer(completion: @escaping (GetMyPostToWall) -> Void) {
+        let path = "/method/photos.getWallUploadServer"
+        
+        let parameters: Parameters = [
+            "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
+            "v": "5.68"
+        ]
+        
+        let url = baseUrl + path
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON(queue: .global(qos: .userInteractive)) { response in
+            guard let data = response.value else { return }
+            
+            let json = JSON(data)
+            
+          let serverUrl = json.flatMap { GetMyPostToWall(getServerUrl: $0.1) }
+            
+            DispatchQueue.main.async {
+                completion(serverUrl[0])
+            }
+        }
+    }
+    
+    
+    
+    func saveWallPhotoToVkServer(photo: String, server: String, hash: String, completion: @escaping (String) -> Void) {
+        let path = "/method/photos.saveWallPhoto"
+        
+        let parameters: Parameters = [
+            "access_token": KeychainWrapper.standard.string(forKey: "vkApiToken")!,
+            "v": "5.68",
+            "photo": photo,
+            "server": server,
+            "hash": hash
+            
+        ]
+        
+        let url = baseUrl + path
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON(queue: .global(qos: .userInteractive)) { response in
+            guard let data = response.value else { return }
+            
+            let json = JSON(data)
+            
+            DispatchQueue.main.async {
+                completion("photo\(json["response"][0]["owner_id"].stringValue)_\(json["response"][0]["id"].stringValue)")
+            }
+//            var dialogs = json["response"]["allDialogs"]["items"].flatMap { GetMyMessages(json: $0.1) }
+         
+            
+        }
+    }
+    
+    
+    
+
+    
+    
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func yandexMapStaticUrlForNewsFeed(long: String, lat: String, imgSize: String) -> String {
+        // https://static-maps.yandex.ru/1.x/?l=map&lang=ru_RU&ll=37.627632999999998%2C55.755786000000001&pt=37.627632999999998%2C55.755786000000001%2Cpm2dol&size=510%2C200&z=15
+        let baseUrl = "https://static-maps.yandex.ru"
+        
+        let path = "/1.x/?"
+        
+        let parameters = "l=map&lang=ru_RU&ll=\(long),\(lat)&pt=\(long),\(lat),pm2dol&size=\(imgSize),\(imgSize)&z=15"
+        
+        let url = baseUrl + path + parameters
+      
+        return url
+    }
+    
     
     func loadVKMessages() {
         let path = "/method/messages.get"
@@ -296,7 +393,7 @@ class VKService {
         }
     }
     
-    func newVkPost(message: String, geo: (Double, Double)?) {
+    func newVkPost(message: String, geo: (Double, Double)?, att: String?) {
         let path = "/method/wall.post"
         
         var parameters: Parameters = [
@@ -310,16 +407,24 @@ class VKService {
             parameters["long"] = geo!.1
         }
         
+        if att != nil {
+            parameters["attachments"] = att!
+        }
+        
         
         let url = baseUrl + path
         
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON(queue: .global(qos: .userInteractive)) { response in
-//            guard let data = response.value else { return }
-//            let json = JSON(data)
+            guard let data = response.value else { return }
+            let json = JSON(data)
+            print("QQQQ", response.request)
+            print("DDDD", response.value)
+            
 //            let messages = json["response"]["items"].flatMap { GetMyMessages(json: $0.1) }
 //            Realm.replaceDataInRealm(toNewObjects: messages)
         }
     }
+    
     
     enum likeAction: String {
         case addLike = "/method/likes.add"
@@ -459,19 +564,18 @@ class VKService {
         let calendar = Calendar.current
 
         let dateFormatter = DateFormatter()
-         dateFormatter.locale = Locale(identifier: "ru")
+//         dateFormatter.locale = Locale(identifier: "ru")
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 
-        let todayMinus7Month = (calendar.date(byAdding: .month, value: -7, to: dateNow))
-        let todayMinus2Days = (calendar.date(byAdding: .day, value: -2, to: dateNow))
+        let todayMinus6Month = (calendar.date(byAdding: .month, value: -6, to: dateNow))
+        let todayMinus1Days = (calendar.date(byAdding: .day, value: -1, to: dateNow))
         
-
         if calendar.isDateInToday(messageDate) {
             dateFormatter.dateFormat = "HH:mm"
             return dateFormatter.string(from: messageDate)
         } else if calendar.isDateInYesterday(messageDate) {
             return "вчера"
-        } else if Double(messageDate.timeIntervalSince1970) >= Double((todayMinus7Month?.timeIntervalSince1970)!) && Double((messageDate.timeIntervalSince1970)) <= Double((todayMinus2Days?.timeIntervalSince1970)!) {
+        } else if Double(messageDate.timeIntervalSince1970) >= Double((todayMinus6Month?.timeIntervalSince1970)!) && Double((messageDate.timeIntervalSince1970)) <= Double((todayMinus1Days?.timeIntervalSince1970)!) {
             dateFormatter.dateFormat = "dd MMM"
             return dateFormatter.string(from: messageDate)
         } else {

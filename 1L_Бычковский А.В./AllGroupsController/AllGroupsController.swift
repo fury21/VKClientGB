@@ -20,7 +20,7 @@ class AllGroupsController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        searchBar.returnKeyType = UIReturnKeyType.done
+//        searchBar.returnKeyType = UIReturnKeyType.done // кнопка "найти" на клавиатуре.
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

@@ -17,7 +17,9 @@ class GetMyNewsFeed: Object {
     @objc dynamic var titlePostPhoto = ""
     @objc dynamic var titlePostLabel = ""
     @objc dynamic var titlePostTime: Double = 0.0
-    
+    @objc dynamic var geoCoordinates = ""
+    @objc dynamic var geoPlaceTitle = ""
+
     // сам пост
     @objc dynamic var postSource_id = 0 // с минусом группа, иначе пользователь
     @objc dynamic var postText = "" // текст к посту
@@ -48,6 +50,8 @@ class GetMyNewsFeed: Object {
         }
         
         post_id = json["post_id"].intValue
+        geoCoordinates = json["geo"]["coordinates"].stringValue
+        geoPlaceTitle = json["geo"]["place"]["title"].stringValue
         
         commentsCount = json["comments"]["count"].intValue
         likesCount = json["likes"]["count"].intValue

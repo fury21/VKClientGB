@@ -23,7 +23,7 @@ class MyFriendsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         pairTableAndRealm()
     
         vKService.loadVKAnyFriends(vKId: vKService.userVkId)
@@ -102,7 +102,7 @@ class MyFriendsController: UITableViewController {
         
         cell.myFriendImage.layer.masksToBounds = true
         
-        cell.myFriendImage.sd_setImage(with: URL(string: friends.friendPhoto50), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed]) //, completed: {(image, _, _, _) in })
+        cell.myFriendImage.sd_setImage(with: URL(string: friends.friendPhoto50), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed])
         
         cell.myFriendImage.layer.cornerRadius = cell.myFriendImage.frame.size.height / 2
         

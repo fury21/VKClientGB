@@ -14,13 +14,13 @@ class AddGeoController: UIViewController, CLLocationManagerDelegate {
 
     let locationManager = CLLocationManager()
     
-    var coordinateMapVC: (Double, Double) = (0, 0)
+    var coordForPost: (Double, Double)?
     
     @IBOutlet weak var mapView: MKMapView!
     
     
     @IBAction func closeMap(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+       performSegue(withIdentifier: "cancelAddGeoFromMapKit", sender: self)
     }
     
     
@@ -30,7 +30,7 @@ class AddGeoController: UIViewController, CLLocationManagerDelegate {
         if let currentLocation = locations.last?.coordinate {
             print(currentLocation)
             
-            coordinateMapVC = (currentLocation.latitude, currentLocation.longitude)
+            coordForPost = (currentLocation.latitude, currentLocation.longitude)
             
             let coordinate = CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
             let coder = CLGeocoder()
@@ -48,12 +48,12 @@ class AddGeoController: UIViewController, CLLocationManagerDelegate {
     }
 
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "addGeoToPost" {
-            let temp = segue.destination as! NewPostController
-            temp.coordinateNews = coordinateMapVC
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "addGeoToPost" {
+//            let temp = segue.destination as! NewPostController
+//            temp.coordinateNews = coordForPost
+//        }
+//    }
     
 
 
@@ -81,5 +81,26 @@ class AddGeoController: UIViewController, CLLocationManagerDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+
+extension AddGeoController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AddGeoCell", for: indexPath) // as! AddGeoCell
+                   
+            return cell
+    }
+}
+
+extension AddGeoController: UITableViewDelegate {
 
 }

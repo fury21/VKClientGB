@@ -35,6 +35,13 @@ class MyNewsFeedCell: UITableViewCell {
     @IBOutlet weak var commentLedingConstraint: NSLayoutConstraint!
     
     
+    @IBOutlet weak var geoIcon: UIImageView!
+    @IBOutlet weak var geoLabel: UILabel!
+    @IBOutlet weak var geoIconHeight: NSLayoutConstraint!
+    @IBOutlet weak var geoLabelHeight: NSLayoutConstraint!
+    @IBOutlet weak var geoIconTopHeight: NSLayoutConstraint!
+    @IBOutlet weak var geoLabelTopHeight: NSLayoutConstraint!
+    
     
     
     @IBOutlet weak var likeButtonOutlet: UIButton!

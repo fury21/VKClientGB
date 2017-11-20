@@ -20,7 +20,7 @@ class MyNewsfeedController: UITableViewController {
     let maxScreenWidth = UIScreen.main.bounds.width
     
     
-
+    
     
     @IBAction func newsFeedRefreshButton(_ sender: Any) {
         //        vKService.loadVKFeedNews()
@@ -31,9 +31,9 @@ class MyNewsfeedController: UITableViewController {
         }
     }
     
-
     
-  
+    
+    
     func photoResizer(indexPathRow i: Int) -> (w: CGFloat, h: CGFloat) {
         var photoSize = getMyNewsFeed![i].attachments_photoSize.components(separatedBy: "x")
         
@@ -53,7 +53,6 @@ class MyNewsfeedController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //   pairTableAndRealm()
-        
         
         vKService.loadVKFeedNews() { [weak self] completion in
             self?.getMyNewsFeed = completion
@@ -90,18 +89,56 @@ class MyNewsfeedController: UITableViewController {
         cell.indexPathCell = indexPath
         
         
-        if !newsFeed.attachments_typePhoto.isEmpty {
+        
+        if newsFeed.attachments_typePhoto.isEmpty && newsFeed.geoCoordinates.isEmpty {
+            cell.newsFeedImageHeight.constant = 0
+            //            cell.newsFeedImage.image = nil
+            //            cell.geoIcon.image = nil
+            cell.geoIconHeight.constant = 0
+            cell.geoLabelHeight.constant = 0
+            cell.geoIconTopHeight.constant = 0
+            cell.geoLabelTopHeight.constant = 0
+            
+        } else if !newsFeed.attachments_typePhoto.isEmpty && newsFeed.geoCoordinates.isEmpty {
             cell.newsFeedImageWidth.constant = self.photoResizer(indexPathRow: indexPath.row).w
             cell.newsFeedImageHeight.constant = self.photoResizer(indexPathRow: indexPath.row).h
             
-//            DispatchQueue.global(qos: .userInteractive).async {
-//            cell.newsFeedImage.setImageFromURL(stringImageUrl: newsFeed.attachments_typePhoto)
-//            }
-//
-           cell.newsFeedImage.sd_setImage(with: URL(string: newsFeed.attachments_typePhoto), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed]) //, completed: {(image, _, _, _) in })
-        } else {
-            cell.newsFeedImageHeight.constant = 0
-            //            cell.newsFeedImage.image = nil
+            cell.geoIconHeight.constant = 0
+            cell.geoLabelHeight.constant = 0
+            cell.geoIconTopHeight.constant = 0
+            cell.geoLabelTopHeight.constant = 0
+            
+            cell.newsFeedImage.sd_setImage(with: URL(string: newsFeed.attachments_typePhoto), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed])
+        } else if newsFeed.attachments_typePhoto.isEmpty && !newsFeed.geoCoordinates.isEmpty {
+            let geoCoordArray = newsFeed.geoCoordinates.components(separatedBy: " ")
+            
+            cell.newsFeedImageWidth.constant = maxScreenWidth
+            cell.newsFeedImageHeight.constant = maxScreenWidth
+            
+            cell.geoIconHeight.constant = 20
+            cell.geoLabelHeight.constant = 20
+            cell.geoIconTopHeight.constant = 10
+            cell.geoLabelTopHeight.constant = 10
+            
+            cell.newsFeedImage.sd_setImage(with: URL(string: vKService.yandexMapStaticUrlForNewsFeed(long: geoCoordArray[1], lat: geoCoordArray[0], imgSize: String(Int(maxScreenWidth)))), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed])
+            
+            cell.geoIcon.sd_setImage(with: URL(string: "https://vk.com/images/places/place.png"), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed])
+            cell.geoLabel.text = newsFeed.geoPlaceTitle
+        } else if !newsFeed.attachments_typePhoto.isEmpty && !newsFeed.geoCoordinates.isEmpty {
+            cell.newsFeedImageWidth.constant = self.photoResizer(indexPathRow: indexPath.row).w
+            cell.newsFeedImageHeight.constant = self.photoResizer(indexPathRow: indexPath.row).h
+            
+            cell.geoIconHeight.constant = 20
+            cell.geoLabelHeight.constant = 20
+            cell.geoIconTopHeight.constant = 10
+            cell.geoLabelTopHeight.constant = 10
+            
+            cell.newsFeedImage.sd_setImage(with: URL(string: newsFeed.attachments_typePhoto), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed])
+            
+            cell.geoIcon.sd_setImage(with: URL(string: "https://vk.com/images/places/place.png"), placeholderImage: nil, options: [.highPriority, .refreshCached, .retryFailed])
+            
+            
+            cell.geoLabel.text = newsFeed.geoPlaceTitle
         }
         
         
@@ -128,19 +165,25 @@ class MyNewsfeedController: UITableViewController {
         // лайки, комменты, шары, просмотры
         
         if newsFeed.userLikes == 1 {
-//        cell.likeIco.image = UIImage(named: "ic_liked_24dp_Normal")
+            //        cell.likeIco.image = UIImage(named: "ic_liked_24dp_Normal")
             cell.likeButtonOutlet.setImage(UIImage(named: "ic_liked_24dp_Normal"), for: .normal)
             cell.likeLabel.textColor = UIColor(red: 254/255, green: 0/255, blue: 41/255, alpha: 1)
         } else {
-//        cell.likeIco.image = UIImage(named: "ic_like_24dp_Normal")
+            //        cell.likeIco.image = UIImage(named: "ic_like_24dp_Normal")
             cell.likeButtonOutlet.setImage(UIImage(named: "ic_like_24dp_Normal"), for: .normal) 
             cell.likeLabel.textColor = UIColor(red: 102/255, green: 110/255, blue: 118/255, alpha: 1)
         }
         
         cell.likeLabel.text = vKService.roundViews(count: newsFeed.likesCount)
         
+        
+        
         if newsFeed.commentCanPost == 1 {
-        cell.commentLabel.text = vKService.roundViews(count: newsFeed.commentsCount)
+            cell.commentLabel.text = vKService.roundViews(count: newsFeed.commentsCount)
+            
+            cell.commentIcoWidth.constant = 20
+            cell.commentLabelWidth.constant = 40
+            cell.commentLedingConstraint.constant = 20
         } else {
             cell.commentIcoWidth.constant = 0
             cell.commentLabelWidth.constant = 0
@@ -157,8 +200,9 @@ class MyNewsfeedController: UITableViewController {
         
     }
     
-    @IBAction func cancelAddNewPost(unwindSegue: UIStoryboardSegue) {}
-    
+    @IBAction func cancelAddGeo(unwindSegue: UIStoryboardSegue) {}
+    @IBAction func doneNewPost(unwindSegue: UIStoryboardSegue) {}
+
     
     //    func pairTableAndRealm() {
     //        guard let realm = try? Realm() else { return }
@@ -231,15 +275,15 @@ class MyNewsfeedController: UITableViewController {
 }
 
 extension MyNewsfeedController: CellForButtonsDelegate {
-
+    
     func didTapCompleteButton(indexPath: IndexPath) {
         if getMyNewsFeed![indexPath.row].userLikes == 0 {
-        vKService.addOrDeleteLike(likeType: .post, owner_id: getMyNewsFeed![indexPath.row].postSource_id, item_id: getMyNewsFeed![indexPath.row].post_id , action: .addLike)
-           
+            vKService.addOrDeleteLike(likeType: .post, owner_id: getMyNewsFeed![indexPath.row].postSource_id, item_id: getMyNewsFeed![indexPath.row].post_id , action: .addLike)
+            
             getMyNewsFeed![indexPath.row].userLikes = 1
         } else {
             vKService.addOrDeleteLike(likeType: .post, owner_id: getMyNewsFeed![indexPath.row].postSource_id, item_id: getMyNewsFeed![indexPath.row].post_id , action: .deleteLike)
-           
+            
             getMyNewsFeed![indexPath.row].userLikes = 0
         }
     }}
