@@ -19,13 +19,6 @@ class AddGeoController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     
-    @IBAction func closeMap(_ sender: Any) {
-       performSegue(withIdentifier: "cancelAddGeoFromMapKit", sender: self)
-    }
-    
-    
-    
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.last?.coordinate {
             print(currentLocation)
@@ -46,16 +39,6 @@ class AddGeoController: UIViewController, CLLocationManagerDelegate {
         
         }
     }
-
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "addGeoToPost" {
-//            let temp = segue.destination as! NewPostController
-//            temp.coordinateNews = coordForPost
-//        }
-//    }
-    
-
 
     
     override func viewDidLoad() {
@@ -98,6 +81,10 @@ extension AddGeoController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddGeoCell", for: indexPath) // as! AddGeoCell
                    
             return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         self.performSegue(withIdentifier: "unwindFromMapSegue", sender: self)
     }
 }
 

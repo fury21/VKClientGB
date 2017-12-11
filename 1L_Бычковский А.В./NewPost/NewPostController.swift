@@ -36,8 +36,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
 
         self.present(image, animated: true) {
             //After it is complete
-            print("22222")
-
         }
     }
     
@@ -156,14 +154,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     func generateBoundaryString() -> String {
         return "Boundary-\(NSUUID().uuidString)"
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

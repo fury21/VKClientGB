@@ -16,6 +16,10 @@
 		38569B071F8018A1001AD141 /* GetMyGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B061F8018A1001AD141 /* GetMyGroups.swift */; };
 		38569B0C1F8118AA001AD141 /* MyFriendsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0B1F8118AA001AD141 /* MyFriendsController.swift */; };
 		38569B0E1F811947001AD141 /* MyFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569B0D1F811947001AD141 /* MyFriendsCell.swift */; };
+		3859F7FA1FCC70AC004A52C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3859F7F91FCC70AC004A52C2 /* GoogleService-Info.plist */; };
+		3859F8011FCC7794004A52C2 /* FireBaseLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3859F8001FCC7794004A52C2 /* FireBaseLoginController.swift */; };
+		3859F8031FCC77E6004A52C2 /* FireBaseLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3859F8021FCC77E6004A52C2 /* FireBaseLogin.storyboard */; };
+		3859F8051FCD941E004A52C2 /* FirebaseVKStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3859F8041FCD941E004A52C2 /* FirebaseVKStruct.swift */; };
 		386244341F8264700013E479 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386244331F8264700013E479 /* WebViewController.swift */; };
 		3864DF701F96268000C4C8FB /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3864DF6F1F96268000C4C8FB /* Groups.storyboard */; };
 		3864DF721F96289E00C4C8FB /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3864DF711F96289E00C4C8FB /* Friends.storyboard */; };
@@ -53,6 +57,10 @@
 		38569B061F8018A1001AD141 /* GetMyGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyGroups.swift; sourceTree = "<group>"; };
 		38569B0B1F8118AA001AD141 /* MyFriendsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsController.swift; sourceTree = "<group>"; };
 		38569B0D1F811947001AD141 /* MyFriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsCell.swift; sourceTree = "<group>"; };
+		3859F7F91FCC70AC004A52C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3859F8001FCC7794004A52C2 /* FireBaseLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseLoginController.swift; sourceTree = "<group>"; };
+		3859F8021FCC77E6004A52C2 /* FireBaseLogin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FireBaseLogin.storyboard; sourceTree = "<group>"; };
+		3859F8041FCD941E004A52C2 /* FirebaseVKStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseVKStruct.swift; sourceTree = "<group>"; };
 		386244331F8264700013E479 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3864DF6F1F96268000C4C8FB /* Groups.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Groups.storyboard; sourceTree = "<group>"; };
 		3864DF711F96289E00C4C8FB /* Friends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
@@ -141,6 +149,15 @@
 			path = MyFriendsController;
 			sourceTree = "<group>";
 		};
+		3859F7FB1FCC7630004A52C2 /* FireBaseLogin */ = {
+			isa = PBXGroup;
+			children = (
+				3859F8021FCC77E6004A52C2 /* FireBaseLogin.storyboard */,
+				3859F8001FCC7794004A52C2 /* FireBaseLoginController.swift */,
+			);
+			path = FireBaseLogin;
+			sourceTree = "<group>";
+		};
 		3864DF691F961E4600C4C8FB /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +212,7 @@
 		38E3A1F21F6989B800F536F8 /* 1L_Бычковский А.В. */ = {
 			isa = PBXGroup;
 			children = (
+				3859F7FB1FCC7630004A52C2 /* FireBaseLogin */,
 				380FE7BA1F76AA2100529ECA /* VKService */,
 				383C5C921FBDD7E500F0E60E /* NewPost */,
 				3864DF6E1F96236700C4C8FB /* MyNewsfeed */,
@@ -207,10 +225,12 @@
 				38E3A1F31F6989B800F536F8 /* AppDelegate.swift */,
 				38E3A2051F6994C200F536F8 /* LoginFormController.swift */,
 				386244331F8264700013E479 /* WebViewController.swift */,
+				3859F8041FCD941E004A52C2 /* FirebaseVKStruct.swift */,
 				38E3A1FA1F6989B800F536F8 /* Assets.xcassets */,
 				3864DF691F961E4600C4C8FB /* Storyboard */,
 				38E3A1FC1F6989B800F536F8 /* LaunchScreen.storyboard */,
 				38E3A1FF1F6989B800F536F8 /* Info.plist */,
+				3859F7F91FCC70AC004A52C2 /* GoogleService-Info.plist */,
 			);
 			path = "1L_Бычковский А.В.";
 			sourceTree = "<group>";
@@ -317,12 +337,14 @@
 			files = (
 				38E3A1FE1F6989B800F536F8 /* LaunchScreen.storyboard in Resources */,
 				3864DF721F96289E00C4C8FB /* Friends.storyboard in Resources */,
+				3859F7FA1FCC70AC004A52C2 /* GoogleService-Info.plist in Resources */,
 				38802DBF1F963D2300C39A9A /* Messages.storyboard in Resources */,
 				38985D721F97A88B004062EF /* NewsFeed.storyboard in Resources */,
 				38802DBD1F963BC400C39A9A /* Settings.storyboard in Resources */,
 				3864DF701F96268000C4C8FB /* Groups.storyboard in Resources */,
 				38802DC11F963DAF00C39A9A /* LoginForm.storyboard in Resources */,
 				38E3A1FB1F6989B800F536F8 /* Assets.xcassets in Resources */,
+				3859F8031FCC77E6004A52C2 /* FireBaseLogin.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,20 +377,28 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-1L_Бычковский А.В./Pods-1L_Бычковский А.В.-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -404,6 +434,7 @@
 				38C8DF291FAB8F2F0082F1E0 /* MyMessagesController.swift in Sources */,
 				38E3A2061F6994C200F536F8 /* LoginFormController.swift in Sources */,
 				38FE7F731F731A6E00EFDF92 /* MyGroupsController.swift in Sources */,
+				3859F8011FCC7794004A52C2 /* FireBaseLoginController.swift in Sources */,
 				389CF0F81F74792700B8A4C9 /* MyGroupsCell.swift in Sources */,
 				38569B071F8018A1001AD141 /* GetMyGroups.swift in Sources */,
 				38985D741F98D10B004062EF /* MyNewsfeedController.swift in Sources */,
@@ -418,6 +449,7 @@
 				38FE7F6E1F730D3200EFDF92 /* AllGroupsCell.swift in Sources */,
 				3818DD7A1FAFB4FA009DCBED /* MyMessagesCell.swift in Sources */,
 				38FE7F781F73D0A600EFDF92 /* VKCell.swift in Sources */,
+				3859F8051FCD941E004A52C2 /* FirebaseVKStruct.swift in Sources */,
 				38E3A1F41F6989B800F536F8 /* AppDelegate.swift in Sources */,
 				386244341F8264700013E479 /* WebViewController.swift in Sources */,
 				38A205BB1F951A910068B1DC /* SettingsViewController.swift in Sources */,
@@ -555,7 +587,7 @@
 				INFOPLIST_FILE = "1L_Бычковский А.В./Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "BAV.-L-----------------";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.bychkovskiy.geekbrainsvk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -570,7 +602,7 @@
 				INFOPLIST_FILE = "1L_Бычковский А.В./Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "BAV.-L-----------------";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.bychkovskiy.geekbrainsvk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};

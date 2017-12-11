@@ -9,6 +9,7 @@
 import Foundation
 import WebKit
 import SwiftKeychainWrapper
+import FirebaseDatabase
 
 let userDefaults = UserDefaults.standard
 
@@ -57,10 +58,7 @@ extension WebViewController: WKNavigationDelegate {
                 return
         }
 
-        let params = fragment
-            .components(separatedBy: "&")
-            .map { $0.components(separatedBy: "=") }
-            .reduce([String: String]()) { result, param in
+        let params = fragment.components(separatedBy: "&").map { $0.components(separatedBy: "=") }.reduce([String: String]()) { result, param in
                 var dict = result
                 let key = param[0]
                 let value = param[1]
@@ -72,8 +70,20 @@ extension WebViewController: WKNavigationDelegate {
         KeychainWrapper.standard.set(params["access_token"]!, forKey: "vkApiToken")
         userDefaults.set(params["user_id"]!, forKey: "vkApiUser_id")
         print(params["access_token"]!)
-        decisionHandler(.cancel)
         
+        let dateNow = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+        dateFormatter.string(from: dateNow)
+        
+        let userIdForFB = FirebaseVKStruct(id: params["user_id"]!)
+        let data = userIdForFB.toAnyObject
+        
+        let dbLink = Database.database().reference()
+        dbLink.child("main/VKLogins").updateChildValues([dateFormatter.string(from: dateNow): "id: \(data)"])
+        
+        
+        decisionHandler(.cancel)
         performSegue(withIdentifier: "toLoginPage", sender: nil)
     }
 }

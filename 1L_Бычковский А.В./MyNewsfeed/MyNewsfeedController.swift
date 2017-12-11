@@ -58,7 +58,12 @@ class MyNewsfeedController: UITableViewController {
             self?.getMyNewsFeed = completion
             self?.tableView?.reloadData()
         }
+        
     }
+    
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 800
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -163,7 +168,6 @@ class MyNewsfeedController: UITableViewController {
         cell.titlePostPhoto.layer.cornerRadius = cell.titlePostPhoto.frame.size.height / 2
         
         // лайки, комменты, шары, просмотры
-        
         if newsFeed.userLikes == 1 {
             //        cell.likeIco.image = UIImage(named: "ic_liked_24dp_Normal")
             cell.likeButtonOutlet.setImage(UIImage(named: "ic_liked_24dp_Normal"), for: .normal)

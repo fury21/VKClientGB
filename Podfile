@@ -9,8 +9,10 @@ use_frameworks!
  pod 'SwiftyJSON'
  pod 'SwiftKeychainWrapper'
  pod 'RealmSwift'
-
  pod 'SDWebImage', '~> 4.0'
+ pod 'Firebase/Core'
+ pod 'Firebase/Database'
+ pod 'Firebase/Auth'
 
 # Pods for 1L_Бычковский А.В.
 

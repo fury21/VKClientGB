@@ -415,10 +415,9 @@ class VKService {
         let url = baseUrl + path
         
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON(queue: .global(qos: .userInteractive)) { response in
-            guard let data = response.value else { return }
-            let json = JSON(data)
-            print("QQQQ", response.request)
-            print("DDDD", response.value)
+//            guard let data = response.value else { return }
+//            let json = JSON(data)
+
             
 //            let messages = json["response"]["items"].flatMap { GetMyMessages(json: $0.1) }
 //            Realm.replaceDataInRealm(toNewObjects: messages)
@@ -468,7 +467,7 @@ class VKService {
             URLQueryItem(name: "client_id", value: String(appId)),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
-            URLQueryItem(name: "scope", value: "offline,friends,photos,groups,messages,wall"),
+            URLQueryItem(name: "scope", value: "offline,friends,photos,groups,messages,wall,email"),
             URLQueryItem(name: "response_type", value: "token"),
             URLQueryItem(name: "v", value: "5.68")
         ]
